@@ -1,33 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Georgian Pastry Clicker</title>
+    <title>საცხობი ტაიკუნი - ქართული საცხობი</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #e74c3c;
+            --primary-dark: #c0392b;
             --secondary: #f39c12;
+            --secondary-dark: #d35400;
             --tertiary: #27ae60;
+            --tertiary-dark: #219a52;
             --dark: #2c3e50;
+            --dark-light: #34495e;
             --light: #ecf0f1;
+            --light-dark: #bdc3c7;
+            --white: #ffffff;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --info: #3498db;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Noto Sans Georgian', 'Nunito', sans-serif;
         }
         
         body {
-            background-color: #f5f5f5;
+            background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
                               url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23f5f5f5" width="100" height="100"/><path fill="%23e74c3c22" d="M0 0h50v50H0z"/><path fill="%2327ae6022" d="M50 0h50v50H50z"/><path fill="%23f39c1222" d="M0 50h50v50H0z"/><path fill="%232c3e5022" d="M50 50h50v50H50z"/></svg>');
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAdVJREFUWIXtlj9IW1EUxn/nJVhcOkSnDsVAliylVHRwCB1K6SjFirNTQKE4FTqli+BSUMigg1MdrIODQyHg0KGhi0MG8de8QCctCMbh3OLL08SYaLvkfnC59553vnu+e+65FyIiIiLCAsJ8EVWqrqpaW4TJ0SiqWlbVvog0VLUMEAEW2+3TUCqVqKg+JeRWDBH59NMBNI7jw/jl5QDYBprApojsFoaRpp+c+gkr3W63sLGx0Y3juJb+WlW9Mcb8APb8zH9fgIhcAJ8BrLXPVbUkIpvW2lXgFbBlrX0EfLr6q45jWF9fN9ZaNzDtOM4PwN7Z2bEAu7u7NzLqW4CqYq2lUql8VNWnQB2oAw+AV+Vy+UO1Ws0Nh0NNTbdEKBWLxYLneQcicgRgrT0GDgHK5XIXOANutYaThygiHDw+Pn4zGAza/X5/Cmx5nnc6Go0G09G/4R6AvNQzMzP5vb29pud5T4An6XgeuAu8SB2OM8zn3kKqCkCtVnOcc/fzjOM4O8B+Go6AszQeuIh01szc+0BERMvl8sdCodDd3t7eAraBw4uLCwA3lbRoBvkf4AhYS21ura3kV8oPojrJuNjCGNO9gZ+1/BmaSfYMaFhrXxpj6vkFIyIiIgL8AiU+OK1/F9d2AAAAAElFTkSuQmCC'), auto;
         }
         
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-dark);
+        }
+        
+        /* Header and navigation */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .game-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background-color: var(--primary-dark);
+            padding: 5px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            padding: 10px 15px;
+            margin: 0 5px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-tab.active {
+            background-color: var(--white);
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Main container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -49,72 +127,171 @@
             }
         }
         
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 15px 0;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /* Game content views */
+        .game-view {
+            display: none;
+            width: 100%;
         }
         
-        h1 {
-            font-size: 1.8rem;
+        .game-view.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
         }
         
-        .stat-panel {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            grid-column: span 3;
+        @media (max-width: 990px) {
+            .game-view.active {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         
         @media (max-width: 768px) {
-            .stat-panel {
+            .game-view.active {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Panels */
+        .panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-panel {
+            grid-column: span 3;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-panel {
                 grid-column: span 1;
             }
         }
         
-        .stat-panel h2 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        
-        .stat {
-            display: inline-block;
-            margin: 0 20px;
-            font-size: 1.1rem;
+        .stat-group {
+            text-align: center;
+            margin: 10px;
+            flex: 1;
+            min-width: 120px;
         }
         
         .stat-value {
+            font-size: 1.8rem;
             font-weight: bold;
-            font-size: 1.3rem;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--dark-light);
         }
         
         .clicker-panel {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
+            grid-column: span 3;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        @media (max-width: 990px) {
+            .clicker-panel {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .clicker-panel {
+                grid-column: span 1;
+            }
+        }
+        
+        .shop-panel, .upgrades-panel, .achievements-panel, .prestige-panel, .settings-panel {
             grid-column: span 1;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        /* Panel headers */
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-dark);
+        }
+        
+        .panel-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .panel-icon {
+            font-size: 1.25rem;
+            color: var(--secondary);
+        }
+        
+        /* Clicker area */
+        .clicker-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         
         .clicker-img {
-            width: 180px;
-            height: 180px;
-            margin: 20px auto;
+            width: 220px;
+            height: 200px;
             cursor: pointer;
             transition: transform 0.1s;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             position: relative;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAl9JREFUWIXtlz1IHFEUhb+7Y4LgD4KVIARBsEg2ECGQQhBSWIQUpkkhFkJIZxcIpLFJZWETSJNCLBKwFBsLwUI2hYQgKBYLQQuJSoKFFhLxZ/YWM8PMurfYVUN2iwPDfW/eO+e+N2/em4EcORLJXg/LAwwGBNVkjxFYVfUMOCv0fZyv5V0qQ9ebQFndTGVj4/vbQnF+Qm+TjUTiIfA8YP4iIqdAc1Kfj8fjABvbNUXHbwfezjlBVTfDcRSrqsaKnAKuF3Y03BTgVlV07q5k3Q98NQQbg4Y7zqWbwq+HCLFmzaL3wNmfDmhUdaYcUgOcAtMLZ9m7t8CbnzpgBlCJRKK50KYZT6uXdUU+1rvulpvCMb7VFh/Dcequ+7X/Q8W3R0BvgD77g2oXbsV39/vxPvw1HwC213e/L21svF7Z2nrxDHRwZrZ/FtZZGrRTjAGMy5X6A3MoZFb9Zs2a7h6azLrPvXlX9BDIsrMFPGgCt1T13Hv+DOQn8EtVf6jquYjYuVRTURJ9wBTg5i4QQ1WjQKeILAOowkdEupOnQZIToC1bUNFG4KOILgPvbGYVRCRifQ6MG2OOk9dOvuuuAWytnT/OEOSFsRGYNZGfQIeqDiXjmXWnlYjsvMzLr83LzBawlKuAqr4AhlQ1oqrPVDUHaCYdU9WTLwsLlZm8sQlGgMNMBlT1CfAK6FeVZ8BoIjF+mFnAYZrHBYQ13ULjzEfDC489vK86PBz3zFkh31fVrsy6A1WpvUBjYF1rG5X9hc7/GE+BfAKGCu2O+3P9rOT4j/gLQvcefNhG5w0AAAAASUVORK5CYII='), pointer;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
         }
         
         .clicker-img:active {
-            transform: scale(0.95);
+            transform: scale(0.95) translateY(0);
+        }
+        
+        .clicker-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .pastry-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .pastry-value {
+            font-size: 1.1rem;
+            color: var(--secondary);
         }
         
         .click-indicator {
@@ -123,6 +300,8 @@
             font-weight: bold;
             animation: floatUp 1s forwards;
             pointer-events: none;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
         }
         
         @keyframes floatUp {
@@ -136,69 +315,135 @@
             }
         }
         
-        .upgrades-panel, .achievements-panel, .shop-panel {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-height: 500px;
-            overflow-y: auto;
-            grid-column: span 1;
-        }
-        
-        .panel-title {
-            color: var(--primary);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .shop-item, .upgrade-item, .achievement-item {
-            padding: 10px;
-            margin-bottom: 10px;
+        /* Progress bar for next pastry */
+        .progress-container {
+            width: 80%;
+            max-width: 300px;
+            margin: 20px auto;
+            background-color: var(--light);
+            height: 10px;
             border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--tertiary);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .progress-info {
+            font-size: 0.9rem;
+            color: var(--dark-light);
+            margin-top: 5px;
+        }
+        
+        /* Shop items, upgrades, achievements */
+        .shop-item, .upgrade-item, .achievement-item, .prestige-option {
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 8px;
             background-color: var(--light);
             position: relative;
             cursor: pointer;
             transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
         }
         
-        .shop-item:hover, .upgrade-item:hover {
+        .shop-item:hover, .upgrade-item:hover, .prestige-option:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
-        .shop-item.disabled, .upgrade-item.disabled {
+        .shop-item.disabled, .upgrade-item.disabled, .prestige-option.disabled {
             opacity: 0.7;
             cursor: not-allowed;
         }
         
-        .shop-item-name, .upgrade-name, .achievement-name {
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .item-name {
             font-weight: bold;
             color: var(--dark);
         }
         
-        .shop-item-cost, .upgrade-cost {
+        .item-cost {
             color: var(--primary);
             font-weight: bold;
         }
         
-        .shop-item-owned, .upgrade-desc, .achievement-desc {
+        .item-desc {
             font-size: 0.9rem;
-            color: #555;
+            color: var(--dark-light);
+            margin-bottom: 8px;
         }
         
+        .shop-item-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+        
+        .shop-item-owned {
+            color: var(--tertiary);
+        }
+        
+        .shop-buy-max {
+            background-color: var(--tertiary);
+            color: white;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            align-self: flex-end;
+            margin-top: 5px;
+        }
+        
+        .shop-buy-max:hover {
+            background-color: var(--tertiary-dark);
+        }
+        
+        /* Achievement styles */
         .achievement-item {
             cursor: default;
-            background-color: var(--light);
+            opacity: 0.9;
         }
         
         .achievement-item.locked {
             opacity: 0.5;
             background-color: #ddd;
+            filter: grayscale(1);
         }
         
         .achievement-item.new {
             animation: pulse 2s infinite;
+        }
+        
+        .achievement-icon {
+            margin-right: 8px;
+            color: var(--secondary);
+        }
+        
+        .achievement-progress {
+            height: 5px;
+            width: 100%;
+            background-color: var(--light-dark);
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .achievement-progress-bar {
+            height: 100%;
+            background-color: var(--tertiary);
+            width: 0%;
         }
         
         @keyframes pulse {
@@ -213,6 +458,246 @@
             }
         }
         
+        /* Prestige styles */
+        .prestige-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .prestige-stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .prestige-option {
+            background-color: var(--dark-light);
+            color: white;
+        }
+        
+        .prestige-option:hover {
+            background-color: var(--dark);
+        }
+        
+        .prestige-option.recommended {
+            border: 2px solid var(--secondary);
+            background-color: var(--dark);
+        }
+        
+        .prestige-option .item-name {
+            color: white;
+        }
+        
+        .prestige-option .item-desc {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .prestige-reward {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-top: 8px;
+        }
+        
+        /* Settings styles */
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            font-weight: bold;
+        }
+        
+        .setting-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Switch toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--light-dark);
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--tertiary);
+        }
+        
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--tertiary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Statistics panel */
+        .statistics-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .statistics-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .statistic-item {
+            padding: 10px;
+            background-color: var(--light);
+            border-radius: 5px;
+        }
+        
+        .statistic-value {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* Buttons */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: 600;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+        }
+        
+        .btn-tertiary {
+            background-color: var(--tertiary);
+        }
+        
+        .btn-tertiary:hover {
+            background-color: var(--tertiary-dark);
+        }
+        
+        .btn-dark {
+            background-color: var(--dark);
+        }
+        
+        .btn-dark:hover {
+            background-color: var(--dark-light);
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.85rem;
+        }
+        
+        .btn-lg {
+            padding: 12px 20px;
+            font-size: 1.1rem;
+        }
+        
+        .btn:disabled {
+            background-color: var(--light-dark);
+            cursor: not-allowed;
+        }
+        
+        /* Button groups */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        /* Events */
+        .event-banner {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: none;
+            position: relative;
+        }
+        
+        .event-banner.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .event-close {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .event-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .event-timer {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        /* Notifications */
         .notification {
             position: fixed;
             bottom: -100px;
@@ -225,108 +710,634 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: bottom 0.5s;
             z-index: 100;
+            max-width: 90%;
         }
         
         .notification.show {
             bottom: 20px;
         }
         
-        .save-load-panel {
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--dark) transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-dark);
+        }
+        
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .modal-close {
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--dark-light);
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
             gap: 10px;
-            grid-column: span 3;
+            padding-top: 10px;
+            border-top: 1px solid var(--light-dark);
         }
         
-        @media (max-width: 768px) {
-            .save-load-panel {
-                grid-column: span 1;
-            }
+        /* Main menu styles */
+        .main-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%232c3e50" width="100" height="100"/><path fill="%23e74c3c55" d="M0 0h50v50H0z"/><path fill="%2327ae6055" d="M50 0h50v50H50z"/><path fill="%23f39c1255" d="M0 50h50v50H0z"/><path fill="%233498db55" d="M50 50h50v50H50z"/></svg>');
+            color: white;
+            background-size: cover;
         }
         
-        button {
+        .main-menu-content {
+            background-color: rgba(44, 62, 80, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .game-logo {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .menu-btn {
             background-color: var(--primary);
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 12px 20px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
+            font-size: 1.2rem;
+            font-weight: 700;
         }
         
-        button:hover {
-            background-color: #c0392b;
+        .menu-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        button.secondary {
+        .menu-btn.continue {
+            background-color: var(--tertiary);
+        }
+        
+        .menu-btn.continue:hover {
+            background-color: var(--tertiary-dark);
+        }
+        
+        .menu-btn.new-game {
             background-color: var(--secondary);
         }
         
-        button.secondary:hover {
-            background-color: #d35400;
+        .menu-btn.new-game:hover {
+            background-color: var(--secondary-dark);
         }
         
-        button:disabled {
-            background-color: #888;
-            cursor: not-allowed;
+        /* Georgian decoration */
+        .georgian-pattern {
+            height: 30px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="30" viewBox="0 0 100 30"><path fill="%23e74c3c" d="M0,15 L10,0 L20,15 L30,0 L40,15 L50,0 L60,15 L70,0 L80,15 L90,0 L100,15 L100,30 L0,30 Z"/></svg>');
+            background-repeat: repeat-x;
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        /* Apprentice styles */
+        .apprentice-img {
+            width: 50px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .spin {
+            animation: spin 2s linear infinite;
+            display: inline-block;
+        }
+        
+        /* Responsive fixes */
+        @media (max-width: 480px) {
+            .stat-group {
+                min-width: 100px;
+            }
+            
+            .nav-tab {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .game-logo {
+                font-size: 2.2rem;
+            }
+            
+            .clicker-img {
+                width: 150px;
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Georgian Pastry Clicker</h1>
-    </header>
-    
-    <div class="container">
-        <div class="stat-panel">
-            <h2>Bakery Stats</h2>
-            <div class="stat">
-                <div>ლარი (GEL):</div>
-                <div class="stat-value" id="money">0</div>
+    <!-- Main Menu -->
+    <div id="main-menu" class="main-menu">
+        <div class="main-menu-content">
+            <h1 class="game-logo">საცხობი ტაიკუნი</h1>
+            <p>ააშენეთ თქვენი ქართული საცხობის იმპერია!</p>
+            <div class="georgian-pattern"></div>
+            <div class="menu-buttons">
+                <button id="continue-btn" class="menu-btn continue" style="display: none;">გაგრძელება</button>
+                <button id="new-game-btn" class="menu-btn new-game">ახალი თამაში</button>
+                <button id="import-btn" class="menu-btn">შენახულის იმპორტი</button>
+                <button id="credits-btn" class="menu-btn">შემქმნელები</button>
             </div>
-            <div class="stat">
-                <div>Pastries per second:</div>
-                <div class="stat-value" id="pastries-per-second">0</div>
-            </div>
-            <div class="stat">
-                <div>Total pastries:</div>
-                <div class="stat-value" id="total-pastries">0</div>
-            </div>
-        </div>
-        
-        <div class="clicker-panel">
-            <h3 class="panel-title">Bake Pastries</h3>
-            <div id="clicker" class="clicker-img"></div>
-            <div>
-                <div id="pastry-name">Khachapuri</div>
-                <div id="pastry-value">+1 per click</div>
-            </div>
-        </div>
-        
-        <div class="shop-panel">
-            <h3 class="panel-title">Bakery Staff</h3>
-            <div id="shop-items"></div>
-        </div>
-        
-        <div class="upgrades-panel">
-            <h3 class="panel-title">Upgrades</h3>
-            <div id="upgrade-items"></div>
-        </div>
-        
-        <div class="achievements-panel">
-            <h3 class="panel-title">Achievements</h3>
-            <div id="achievement-items"></div>
-        </div>
-        
-        <div class="save-load-panel">
-            <button id="save-btn">Save Game</button>
-            <button id="load-btn">Load Game</button>
-            <button id="reset-btn" class="secondary">Reset Game</button>
         </div>
     </div>
     
-    <div class="notification" id="notification"></div>
+    <!-- Game Interface -->
+    <div id="game-interface" style="display: none;">
+        <header>
+            <h1 class="game-title">საცხობი ტაიკუნი</h1>
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-view="game">საცხობი</div>
+                <div class="nav-tab" data-view="shop">მაღაზია</div>
+                <div class="nav-tab" data-view="upgrades">გაუმჯობესებები</div>
+                <div class="nav-tab" data-view="achievements">მიღწევები</div>
+                <div class="nav-tab" data-view="prestige">პრესტიჟი</div>
+                <div class="nav-tab" data-view="statistics">სტატისტიკა</div>
+                <div class="nav-tab" data-view="settings">პარამეტრები</div>
+            </div>
+        </header>
+        
+        <div class="event-banner" id="event-banner">
+            <div class="event-close" id="event-close">×</div>
+            <div class="event-title">სუპრის ფესტივალი!</div>
+            <div class="event-desc">აღნიშნეთ ქართული სტუმართმოყვარეობა! ყველა ცომეული 50%-ით მეტი ღირებულებისაა!</div>
+            <div class="event-timer" id="event-timer">1:00:00 დარჩა</div>
+        </div>
+        
+        <!-- Main Game View -->
+        <div id="game-view" class="game-view active container">
+            <div class="panel stats-panel">
+                <div class="stat-group">
+                    <div class="stat-value" id="money">0</div>
+                    <div class="stat-label">ლარი (GEL)</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="pastries-per-second">0</div>
+                    <div class="stat-label">ცომეული წამში</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="click-value">1</div>
+                    <div class="stat-label">თითო კლიკზე</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="total-pastries">0</div>
+                    <div class="stat-label">ჯამში გამომცხვარი</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="multiplier">1x</div>
+                    <div class="stat-label">გამრავლება</div>
+                </div>
+            </div>
+            
+            <div class="panel clicker-panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">გამოაცხვეთ ცომეული</h3>
+                    <span class="panel-icon" id="auto-click-icon" style="display: none;">🔄</span>
+                </div>
+                <div class="clicker-container">
+                    <div id="clicker" class="clicker-img"></div>
+                    <div class="clicker-info">
+                        <div id="pastry-name" class="pastry-name">ხაჭაპური</div>
+                        <div id="pastry-value" class="pastry-value">+1 თითო კლიკზე</div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div id="pastry-progress" class="progress-bar"></div>
+                </div>
+                <div id="progress-info" class="progress-info">შემდეგი ცომეული: 0/20</div>
+                <div class="btn-group">
+                    <button id="auto-click-btn" class="btn btn-secondary" style="display: none;">ავტო-კლიკი: გამორთული</button>
+                    <button id="special-ability-btn" class="btn btn-tertiary" style="display: none;">სპეციალური უნარი</button>
+                </div>
+            </div>
+            
+            <div class="panel shop-panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">მცხობელები</h3>
+                    <span class="panel-icon">👨‍🍳</span>
+                </div>
+                <div id="shop-items"></div>
+            </div>
+            
+            <div class="panel upgrades-panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">გაუმჯობესებები</h3>
+                    <span class="panel-icon">⬆️</span>
+                </div>
+                <div id="upgrade-items"></div>
+            </div>
+            
+            <div class="panel achievements-panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">ქართული სამზარეულო</h3>
+                    <span class="panel-icon">🍽️</span>
+                </div>
+                <p class="item-desc">სპეციალური ბონუს ნივთები, რომლებიც ზრდიან წარმოებას.</p>
+                <div id="special-items"></div>
+            </div>
+            
+            <div class="btn-group" style="grid-column: span 3;">
+                <button id="save-btn" class="btn">შენახვა</button>
+                <button id="export-btn" class="btn">ექსპორტი</button>
+                <button id="reset-btn" class="btn btn-secondary">განულება</button>
+            </div>
+        </div>
+        
+        <!-- Shop View -->
+        <div id="shop-view" class="game-view container">
+            <div class="panel stats-panel">
+                <div class="stat-group">
+                    <div class="stat-value" id="money-shop">0</div>
+                    <div class="stat-label">ლარი (GEL)</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="pastries-per-second-shop">0</div>
+                    <div class="stat-label">ცომეული წამში</div>
+                </div>
+            </div>
+            
+            <div class="panel shop-panel" style="grid-column: span 3;">
+                <div class="panel-header">
+                    <h3 class="panel-title">პერსონალი და შენობები</h3>
+                    <span class="panel-icon">🏢</span>
+                </div>
+                <div class="btn-group">
+                    <button id="buy-1" class="btn btn-sm active">ყიდვა 1</button>
+                    <button id="buy-10" class="btn btn-sm">ყიდვა 10</button>
+                    <button id="buy-100" class="btn btn-sm">ყიდვა 100</button>
+                    <button id="buy-max" class="btn btn-sm">ყიდვა მაქს.</button>
+                </div>
+                <div id="shop-items-full"></div>
+            </div>
+            
+        </div>
+        
+        <!-- Upgrades View -->
+        <div id="upgrades-view" class="game-view container">
+            <div class="panel stats-panel">
+                <div class="stat-group">
+                    <div class="stat-value" id="money-upgrades">0</div>
+                    <div class="stat-label">ლარი (GEL)</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="upgrades-owned">0</div>
+                    <div class="stat-label">შეძენილი გაუმჯობესებები</div>
+                </div>
+            </div>
+            
+            <div class="panel upgrades-panel" style="grid-column: span 3;">
+                <div class="panel-header">
+                    <h3 class="panel-title">ხელმისაწვდომი გაუმჯობესებები</h3>
+                    <span class="panel-icon">🛒</span>
+                </div>
+                <div id="upgrade-items-full"></div>
+            </div>
+            
+            <div class="panel upgrades-panel" style="grid-column: span 3;">
+                <div class="panel-header">
+                    <h3 class="panel-title">შეძენილი გაუმჯობესებები</h3>
+                    <span class="panel-icon">✅</span>
+                </div>
+                <div id="purchased-upgrades"></div>
+            </div>
+        </div>
+        
+        <!-- Achievements View -->
+        <div id="achievements-view" class="game-view container">
+            <div class="panel stats-panel">
+                <div class="stat-group">
+                    <div class="stat-value" id="achievements-earned">0/0</div>
+                    <div class="stat-label">მიღწევები</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="achievements-bonus">0%</div>
+                    <div class="stat-label">წარმოების ბონუსი</div>
+                </div>
+            </div>
+            
+            <div class="panel achievements-panel" style="grid-column: span 3;">
+                <div class="panel-header">
+                    <h3 class="panel-title">მიღწევები</h3>
+                    <span class="panel-icon">🏆</span>
+                </div>
+                <div id="achievement-items-full"></div>
+            </div>
+        </div>
+        
+        <!-- Prestige View -->
+        <div id="prestige-view" class="game-view container">
+            <div class="panel stats-panel">
+                <div class="stat-group">
+                    <div class="stat-value" id="prestige-points">0</div>
+                    <div class="stat-label">პრესტიჟის ქულები</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="prestige-level">0</div>
+                    <div class="stat-label">პრესტიჟის დონე</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="prestige-multiplier">1x</div>
+                    <div class="stat-label">მიმდინარე გამრავლება</div>
+                </div>
+            </div>
+            
+            <div class="panel prestige-panel" style="grid-column: span 3;">
+                <div class="panel-header">
+                    <h3 class="panel-title">პრესტიჟის ვარიანტები</h3>
+                    <span class="panel-icon">✨</span>
+                </div>
+                <div class="prestige-stats">
+                    <div>
+                        <div class="prestige-stat-value" id="new-prestige-points">+0</div>
+                        <div class="stat-label">ახალი ქულები</div>
+                    </div>
+                    <div>
+                        <div class="prestige-stat-value" id="next-multiplier">1x</div>
+                        <div class="stat-label">შემდეგი გამრავლება</div>
+                    </div>
+                </div>
+                <p class="item-desc">პრესტიჟი განულებს თქვენს პროგრესს, მაგრამ მოგცემთ მუდმივ ბონუსებს. თქვენ გჭირდებათ მინიმუმ 1,000,000 ცომეული პრესტიჟისთვის.</p>
+                <div id="prestige-options"></div>
+                <button id="prestige-btn" class="btn btn-lg btn-secondary" disabled>პრესტიჟი ახლა</button>
+            </div>
+        </div>
+        
+        <!-- Statistics View -->
+        <div id="statistics-view" class="game-view container">
+            <div class="panel stats-panel">
+                <div class="stat-group">
+                    <div class="stat-value" id="total-time-played">0:00:00</div>
+                    <div class="stat-label">თამაშის დრო</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="total-clicks">0</div>
+                    <div class="stat-label">ჯამური კლიკები</div>
+                </div>
+                <div class="stat-group">
+                    <div class="stat-value" id="total-money-earned">0</div>
+                    <div class="stat-label">ჯამური გამომუშავებული ლარი</div>
+                </div>
+            </div>
+            
+            <div class="panel" style="grid-column: span 3;">
+                <div class="panel-header">
+                    <h3 class="panel-title">თამაშის სტატისტიკა</h3>
+                    <span class="panel-icon">📊</span>
+                </div>
+                <div class="statistics-list" id="statistics-list"></div>
+            </div>
+        </div>
+        
+        <!-- Settings View -->
+        <div id="settings-view" class="game-view container">
+            <div class="panel settings-panel" style="grid-column: span 3;">
+                <div class="panel-header">
+                    <h3 class="panel-title">თამაშის პარამეტრები</h3>
+                    <span class="panel-icon">⚙️</span>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">ხმის ეფექტები</div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">შეტყობინების ხანგრძლივობა</div>
+                    <div class="setting-control">
+                        <select id="notification-duration">
+                            <option value="2000">მოკლე (2წმ)</option>
+                            <option value="3000" selected>საშუალო (3წმ)</option>
+                            <option value="5000">გრძელი (5წმ)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">აჩვენე კლიკის ინდიკატორები</div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="click-indicator-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">რიცხვების ფორმატი</div>
+                    <div class="setting-control">
+                        <select id="number-format">
+                            <option value="standard">სტანდარტული (1,234.56)</option>
+                            <option value="scientific">სამეცნიერო (1.23e3)</option>
+                            <option value="compact" selected>კომპაქტური (1.23K)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button id="export-save-btn" class="btn">შენახულის ექსპორტი</button>
+                    <button id="import-save-btn" class="btn">შენახულის იმპორტი</button>
+                    <button id="hard-reset-btn" class="btn btn-secondary">სრული განულება</button>
+                </div>
+                <div class="btn-group">
+                    <button id="back-to-menu-btn" class="btn">მთავარ მენიუში დაბრუნება</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="notification" id="notification"></div>
+    </div>
+    
+    <!-- Modals -->
+    <div class="modal-overlay" id="import-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">შენახულის იმპორტი</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>ჩასვით თქვენი შენახული კოდი ქვემოთ:</p>
+                <textarea id="import-code" rows="5" style="width: 100%; margin-top: 10px;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="import-confirm" class="btn">იმპორტი</button>
+                <button class="btn btn-secondary modal-close-btn">გაუქმება</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="export-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">შენახულის ექსპორტი</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>დააკოპირეთ ქვემოთ მოცემული კოდი თამაშის შესანახად:</p>
+                <textarea id="export-code" rows="5" style="width: 100%; margin-top: 10px;" readonly></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="copy-export" class="btn">ბუფერში კოპირება</button>
+                <button class="btn btn-secondary modal-close-btn">დახურვა</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="credits-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">შემქმნელები</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4>საცხობი ტაიკუნი</h4>
+                <p>ქართული საცხობის კლიკერის თამაში</p>
+                <p>შექმნილია: BlankoQ-სთვის</p>
+                <p>ვერსია: 1.0.0</p>
+                <div class="georgian-pattern"></div>
+                <p>განსაკუთრებული მადლობა ქართულ სამზარეულოს შთაგონებისთვის!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn modal-close-btn">დახურვა</button>
+            </div>
+        </div>
+    </div>
     
     <script>
         // Game data
@@ -335,49 +1346,254 @@
             moneyPerClick: 1,
             moneyPerSecond: 0,
             totalPastries: 0,
+            totalClicks: 0,
+            totalMoneyEarned: 0,
             clickMultiplier: 1,
             autoClickerInterval: 1000,
             currentPastryLevel: 0,
             lastSave: Date.now(),
+            startTime: Date.now(),
+            totalTimePlayed: 0,
+            prestigeLevel: 0,
+            prestigePoints: 0,
+            prestigeMultiplier: 1,
             achievements: {},
             producers: {},
             upgrades: {},
+            specialItems: {},
+            autoClicker: {
+                enabled: false,
+                speed: 1, // clicks per second
+                last: Date.now()
+            },
+            specialAbility: {
+                unlocked: false,
+                cooldown: 60, // seconds
+                duration: 10, // seconds
+                multiplier: 10,
+                lastUsed: 0,
+                active: false
+            },
+            events: {
+                active: false,
+                type: null,
+                multiplier: 1,
+                endTime: 0
+            },
             settings: {
+                soundEnabled: true,
                 notificationDuration: 3000,
+                showClickIndicators: true,
+                numberFormat: 'compact',
+                buyMode: 1, // 1, 10, 100, max
             }
         };
         
         // Pastry types with progression
         const pastryTypes = [
-            { name: "Khachapuri", value: 1, image: createPastryImageUrl("#F5DEB3", "#FFA07A") },
-            { name: "Lobiani", value: 5, image: createPastryImageUrl("#8B4513", "#D2691E") },
-            { name: "Churchkhela", value: 10, image: createPastryImageUrl("#8B0000", "#FF4500") },
-            { name: "Acharuli", value: 25, image: createPastryImageUrl("#F5DEB3", "#FFFF00") },
-            { name: "Pkhlovani", value: 50, image: createPastryImageUrl("#90EE90", "#556B2F") },
-            { name: "Nazuki", value: 100, image: createPastryImageUrl("#D2B48C", "#8B4513") },
-            { name: "Kada", value: 200, image: createPastryImageUrl("#DEB887", "#CD853F") },
-            { name: "Achma", value: 500, image: createPastryImageUrl("#FFDEAD", "#FFD700") }
+            { name: "ხაჭაპური", value: 1, image: "https://pngimg.com/d/khachapuri_PNG2.png" },
+            { name: "ლობიანი", value: 5, image: createPastryImageUrl("#8B4513", "#D2691E", "lobiani") },
+            { name: "ჩურჩხელა", value: 10, image: createPastryImageUrl("#8B0000", "#FF4500", "churchkhela") },
+            { name: "აჭარული", value: 25, image: createPastryImageUrl("#F5DEB3", "#FFFF00", "acharuli") },
+            { name: "ფხლოვანი", value: 50, image: createPastryImageUrl("#90EE90", "#556B2F", "pkhlovani") },
+            { name: "ნაზუქი", value: 100, image: createPastryImageUrl("#D2B48C", "#8B4513", "nazuki") },
+            { name: "ქადა", value: 200, image: createPastryImageUrl("#DEB887", "#CD853F", "kada") },
+            { name: "აჩმა", value: 500, image: createPastryImageUrl("#FFDEAD", "#FFD700", "achma") },
+            { name: "შოთის პური", value: 1000, image: createPastryImageUrl("#E8DCCA", "#B8860B", "shotis") },
+            { name: "კუბდარი", value: 2500, image: createPastryImageUrl("#B22222", "#800000", "kubdari") },
+            { name: "მჭადი", value: 5000, image: createPastryImageUrl("#FFFF99", "#FFD700", "mchadi") },
+            { name: "ჭვიშტარი", value: 10000, image: createPastryImageUrl("#FFF8DC", "#F0E68C", "chvishtari") }
         ];
         
         // Create data URI for pastry images
-        function createPastryImageUrl(fillColor, accentColor) {
-            return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
-                <ellipse cx="90" cy="90" rx="80" ry="60" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
-                <path d="M50,90 Q90,40 130,90" fill="none" stroke="${accentColor}" stroke-width="3" />
-                <path d="M50,100 Q90,150 130,100" fill="none" stroke="${accentColor}" stroke-width="3" />
-            </svg>`;
+        function createPastryImageUrl(fillColor, accentColor, type) {
+            let svgContent;
+            
+            switch(type) {
+                case "lobiani":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <ellipse cx="90" cy="90" rx="75" ry="60" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <circle cx="90" cy="90" r="35" fill="${accentColor}" opacity="0.7" />
+                        <path d="M60,70 Q90,85 120,70" fill="none" stroke="#5E2605" stroke-width="2" />
+                        <path d="M60,110 Q90,95 120,110" fill="none" stroke="#5E2605" stroke-width="2" />
+                    </svg>`;
+                    break;
+                case "churchkhela":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <path d="M90,30 L105,170 L75,170 Z" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <circle cx="90" cy="30" r="10" fill="#8B4513" />
+                        <circle cx="83" cy="50" r="5" fill="#FFFFFF" opacity="0.5" />
+                        <circle cx="96" cy="80" r="5" fill="#FFFFFF" opacity="0.5" />
+                        <circle cx="85" cy="110" r="5" fill="#FFFFFF" opacity="0.5" />
+                        <circle cx="92" cy="140" r="5" fill="#FFFFFF" opacity="0.5" />
+                    </svg>`;
+                    break;
+                case "acharuli":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <ellipse cx="90" cy="90" rx="75" ry="60" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <ellipse cx="90" cy="80" rx="30" ry="20" fill="#FFFF99" />
+                        <circle cx="90" cy="80" r="12" fill="#F8DE7E" />
+                    </svg>`;
+                    break;
+                case "pkhlovani":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <polygon points="40,50 140,50 140,130 40,130" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <line x1="40" y1="70" x2="140" y2="70" stroke="${accentColor}" stroke-width="2" />
+                        <line x1="40" y1="90" x2="140" y2="90" stroke="${accentColor}" stroke-width="2" />
+                        <line x1="40" y1="110" x2="140" y2="110" stroke="${accentColor}" stroke-width="2" />
+                    </svg>`;
+                    break;
+                case "nazuki":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <rect x="40" y="70" width="100" height="40" rx="5" ry="5" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <path d="M50,70 L50,110" stroke="${accentColor}" stroke-width="2" />
+                        <path d="M70,70 L70,110" stroke="${accentColor}" stroke-width="2" />
+                        <path d="M90,70 L90,110" stroke="${accentColor}" stroke-width="2" />
+                        <path d="M110,70 L110,110" stroke="${accentColor}" stroke-width="2" />
+                        <path d="M130,70 L130,110" stroke="${accentColor}" stroke-width="2" />
+                    </svg>`;
+                    break;
+                case "kada":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <rect x="40" y="60" width="100" height="60" rx="30" ry="30" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <path d="M50,75 Q90,50 130,75" fill="none" stroke="${accentColor}" stroke-width="3" />
+                        <path d="M50,105 Q90,130 130,105" fill="none" stroke="${accentColor}" stroke-width="3" />
+                    </svg>`;
+                    break;
+                case "achma":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <rect x="40" y="60" width="100" height="60" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <line x1="40" y1="75" x2="140" y2="75" stroke="${accentColor}" stroke-width="2" />
+                        <line x1="40" y1="90" x2="140" y2="90" stroke="${accentColor}" stroke-width="2" />
+                        <line x1="40" y1="105" x2="140" y2="105" stroke="${accentColor}" stroke-width="2" />
+                    </svg>`;
+                    break;
+                case "shotis":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <path d="M40,60 Q90,30 140,60 L140,120 Q90,150 40,120 Z" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <path d="M60,70 Q90,50 120,70" fill="none" stroke="${accentColor}" stroke-width="2" />
+                        <path d="M60,110 Q90,130 120,110" fill="none" stroke="${accentColor}" stroke-width="2" />
+                    </svg>`;
+                    break;
+                case "kubdari":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <ellipse cx="90" cy="90" rx="70" ry="50" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <path d="M50,90 L130,90" stroke="${accentColor}" stroke-width="2" />
+                        <path d="M90,50 L90,130" stroke="${accentColor}" stroke-width="2" />
+                        <path d="M65,65 L115,115" stroke="${accentColor}" stroke-width="2" />
+                        <path d="M65,115 L115,65" stroke="${accentColor}" stroke-width="2" />
+                    </svg>`;
+                    break;
+                case "mchadi":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <circle cx="90" cy="90" r="60" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <circle cx="90" cy="90" r="40" fill="none" stroke="${accentColor}" stroke-width="2" />
+                        <circle cx="90" cy="90" r="20" fill="none" stroke="${accentColor}" stroke-width="2" />
+                    </svg>`;
+                    break;
+                case "chvishtari":
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <circle cx="90" cy="90" r="60" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <circle cx="70" cy="70" r="10" fill="${accentColor}" opacity="0.7" />
+                        <circle cx="110" cy="70" r="10" fill="${accentColor}" opacity="0.7" />
+                        <circle cx="70" cy="110" r="10" fill="${accentColor}" opacity="0.7" />
+                        <circle cx="110" cy="110" r="10" fill="${accentColor}" opacity="0.7" />
+                        <circle cx="90" cy="90" r="10" fill="${accentColor}" opacity="0.7" />
+                    </svg>`;
+                    break;
+                default:
+                    svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                        <ellipse cx="90" cy="90" rx="80" ry="60" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                        <path d="M50,90 Q90,40 130,90" fill="none" stroke="${accentColor}" stroke-width="3" />
+                        <path d="M50,100 Q90,150 130,100" fill="none" stroke="${accentColor}" stroke-width="3" />
+                    </svg>`;
+            }
+            
+            return `data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`;
         }
         
         // Define producers
         const producerTypes = [
-            { id: "apprentice", name: "Apprentice Baker", baseCost: 10, baseOutput: 0.1, description: "A novice baker learning the craft" },
-            { id: "baker", name: "Baker", baseCost: 100, baseOutput: 1, description: "Professional baker with years of experience" },
-            { id: "master", name: "Master Baker", baseCost: 1000, baseOutput: 8, description: "Master of Georgian pastry arts" },
-            { id: "oven", name: "Traditional Oven", baseCost: 10000, baseOutput: 47, description: "Authentic tone oven for baking" },
-            { id: "bakery", name: "Small Bakery", baseCost: 100000, baseOutput: 260, description: "Your own small bakery shop" },
-            { id: "factory", name: "Pastry Factory", baseCost: 1000000, baseOutput: 1400, description: "Industrial-scale production facility" },
-            { id: "franchise", name: "Bakery Franchise", baseCost: 10000000, baseOutput: 7800, description: "A chain of Georgian bakeries" },
-            { id: "corporation", name: "Pastry Corporation", baseCost: 100000000, baseOutput: 44000, description: "Multinational Georgian pastry corporation" }
+            { 
+                id: "apprentice", 
+                name: "შეგირდი მცხობელი", 
+                baseCost: 10, 
+                baseOutput: 0.1, 
+                description: "დამწყები მცხობელი, რომელიც სწავლობს ხელობას",
+                icon: "https://static.vecteezy.com/system/resources/thumbnails/045/821/312/small/a-cheerful-man-in-a-white-t-shirt-and-jeans-waves-with-a-friendly-smile-png.png"
+            },
+            { 
+                id: "baker", 
+                name: "მცხობელი", 
+                baseCost: 100, 
+                baseOutput: 1, 
+                description: "პროფესიონალი მცხობელი მრავალწლიანი გამოცდილებით",
+                icon: "👩‍🍳"
+            },
+            { 
+                id: "master", 
+                name: "ოსტატი მცხობელი", 
+                baseCost: 1000, 
+                baseOutput: 8, 
+                description: "ქართული საცხობის ოსტატი საოჯახო რეცეპტებით",
+                icon: "👨‍🍳👑"
+            },
+            { 
+                id: "oven", 
+                name: "ტრადიციული ღუმელი", 
+                baseCost: 12000, 
+                baseOutput: 47, 
+                description: "ნამდვილი ტონე ტრადიციული ცომეულისთვის",
+                icon: "🔥"
+            },
+            { 
+                id: "bakery", 
+                name: "პატარა საცხობი", 
+                baseCost: 130000, 
+                baseOutput: 260, 
+                description: "თქვენი საკუთარი პატარა საცხობი ადგილობრივ უბანში",
+                icon: "🏠"
+            },
+            { 
+                id: "factory", 
+                name: "საცხობი ფაბრიკა", 
+                baseCost: 1400000, 
+                baseOutput: 1400, 
+                description: "ინდუსტრიული მასშტაბის საწარმო თანამედროვე აღჭურვილობით",
+                icon: "🏭"
+            },
+            { 
+                id: "franchise", 
+                name: "საცხობი ფრანჩიზა", 
+                baseCost: 20000000, 
+                baseOutput: 7800, 
+                description: "ქართული საცხობების ქსელი მთელს ქვეყანაში",
+                icon: "🏘️"
+            },
+            { 
+                id: "corporation", 
+                name: "საცხობი კორპორაცია", 
+                baseCost: 330000000, 
+                baseOutput: 44000, 
+                description: "მულტინაციონალური ქართული საცხობი კორპორაცია",
+                icon: "🏢"
+            },
+            { 
+                id: "empire", 
+                name: "საცხობი იმპერია", 
+                baseCost: 5100000000, 
+                baseOutput: 260000, 
+                description: "მსოფლიო მასშტაბის ქართული სამზარეულოს იმპერია",
+                icon: "🌍"
+            },
+            { 
+                id: "timeTravel", 
+                name: "დროში მოგზაური საცხობი", 
+                baseCost: 75000000000, 
+                baseOutput: 1600000, 
+                description: "წარსულისა და მომავლის ცომეულების შემოტანა",
+                icon: "⏰"
+            }
         ];
         
         // Initialize producers in game state
@@ -387,16 +1603,159 @@
         
         // Define upgrades
         const upgradeTypes = [
-            { id: "better_flour", name: "Premium Flour", cost: 50, description: "Better flour for tastier pastries", requirement: { totalPastries: 10 }, effect: { clickMultiplier: 2 } },
-            { id: "cheese_upgrade", name: "Sulguni Cheese", cost: 200, description: "Authentic Georgian cheese", requirement: { totalPastries: 50 }, effect: { clickMultiplier: 2 } },
-            { id: "baking_tools", name: "Professional Tools", cost: 500, description: "Better tools for faster baking", requirement: { producers: { apprentice: 5 } }, effect: { producerMultiplier: { apprentice: 2 } } },
-            { id: "traditional_recipes", name: "Traditional Recipes", cost: 1000, description: "Authentic Georgian recipes", requirement: { totalPastries: 200 }, effect: { clickMultiplier: 2 } },
-            { id: "master_training", name: "Master Training", cost: 5000, description: "Send bakers to training", requirement: { producers: { baker: 10 } }, effect: { producerMultiplier: { baker: 2 } } },
-            { id: "stone_oven", name: "Stone Oven", cost: 10000, description: "Traditional stone ovens", requirement: { producers: { master: 5 } }, effect: { producerMultiplier: { master: 2 } } },
-            { id: "marketing", name: "Marketing Campaign", cost: 50000, description: "Advertise your pastries", requirement: { totalPastries: 5000 }, effect: { globalProducerMultiplier: 1.5 } },
-            { id: "automation", name: "Bakery Automation", cost: 200000, description: "Partially automate your bakery", requirement: { producers: { oven: 10 } }, effect: { producerMultiplier: { oven: 2 } } },
-            { id: "distribution", name: "Distribution Network", cost: 1000000, description: "Nationwide distribution", requirement: { producers: { bakery: 10 } }, effect: { producerMultiplier: { bakery: 2 } } },
-            { id: "international", name: "International Expansion", cost: 5000000, description: "Expand to international markets", requirement: { totalPastries: 1000000 }, effect: { globalProducerMultiplier: 2 } }
+            { 
+                id: "better_flour", 
+                name: "პრემიუმ ფქვილი", 
+                cost: 50, 
+                description: "უკეთესი ფქვილი გემრიელი ცომეულისთვის", 
+                requirement: { totalPastries: 10 }, 
+                effect: { clickMultiplier: 2 },
+                icon: "🌾"
+            },
+            { 
+                id: "cheese_upgrade", 
+                name: "სულგუნის ყველი", 
+                cost: 200, 
+                description: "ნამდვილი ქართული ყველი ავთენტური გემოსთვის", 
+                requirement: { totalPastries: 50 }, 
+                effect: { clickMultiplier: 2 },
+                icon: "🧀"
+            },
+            { 
+                id: "baking_tools", 
+                name: "პროფესიონალური ხელსაწყოები", 
+                cost: 500, 
+                description: "უკეთესი ხელსაწყოები სწრაფი ცხობისთვის", 
+                requirement: { producers: { apprentice: 5 } }, 
+                effect: { producerMultiplier: { apprentice: 2 } },
+                icon: "🔨"
+            },
+            { 
+                id: "traditional_recipes", 
+                name: "ტრადიციული რეცეპტები", 
+                cost: 1000, 
+                description: "ავთენტური ქართული რეცეპტები თაობებიდან", 
+                requirement: { totalPastries: 200 }, 
+                effect: { clickMultiplier: 2 },
+                icon: "📖"
+            },
+            { 
+                id: "master_training", 
+                name: "ოსტატის ტრენინგი", 
+                cost: 5000, 
+                description: "მცხობელების გაგზავნა ქართველ ოსტატებთან ტრენინგზე", 
+                requirement: { producers: { baker: 10 } }, 
+                effect: { producerMultiplier: { baker: 2 } },
+                icon: "🎓"
+            },
+            { 
+                id: "stone_oven", 
+                name: "ქვის ღუმელი", 
+                cost: 10000, 
+                description: "ტრადიციული ქვის ღუმელი ავთენტური გამოცხობისთვის", 
+                requirement: { producers: { master: 5 } }, 
+                effect: { producerMultiplier: { master: 2 } },
+                icon: "🧱"
+            },
+            { 
+                id: "marketing", 
+                name: "მარკეტინგული კამპანია", 
+                cost: 50000, 
+                description: "რეკლამა ადგილობრივებისა და ტურისტებისთვის", 
+                requirement: { totalPastries: 5000 }, 
+                effect: { globalProducerMultiplier: 1.5 },
+                icon: "📱"
+            },
+            { 
+                id: "automation", 
+                name: "საცხობის ავტომატიზაცია", 
+                cost: 200000, 
+                description: "საცხობი პროცესების ნაწილობრივი ავტომატიზაცია", 
+                requirement: { producers: { oven: 10 } }, 
+                effect: { producerMultiplier: { oven: 2 } },
+                icon: "⚙️"
+            },
+            { 
+                id: "distribution", 
+                name: "დისტრიბუციის ქსელი", 
+                cost: 1000000, 
+                description: "ახალი ცომეულის ეროვნული დისტრიბუცია", 
+                requirement: { producers: { bakery: 10 } }, 
+                effect: { producerMultiplier: { bakery: 2 } },
+                icon: "🚚"
+            },
+            { 
+                id: "international", 
+                name: "საერთაშორისო გაფართოება", 
+                cost: 5000000, 
+                description: "საერთაშორისო ბაზრებზე გასვლა ქართული გემოებით", 
+                requirement: { totalPastries: 1000000 }, 
+                effect: { globalProducerMultiplier: 2 },
+                icon: "✈️"
+            },
+            { 
+                id: "quality_control", 
+                name: "ხარისხის კონტროლი", 
+                cost: 25000000, 
+                description: "თანმიმდევრული ხარისხის უზრუნველყოფა ყველა საცხობში", 
+                requirement: { producers: { factory: 5 } }, 
+                effect: { producerMultiplier: { factory: 2 } },
+                icon: "✅"
+            },
+            { 
+                id: "franchise_training", 
+                name: "ფრანჩიზის სატრენინგო პროგრამა", 
+                cost: 100000000, 
+                description: "სტანდარტიზებული ტრენინგი ყველა ფრანჩიზის ადგილზე", 
+                requirement: { producers: { franchise: 5 } }, 
+                effect: { producerMultiplier: { franchise: 2 } },
+                icon: "👥"
+            },
+            { 
+                id: "corporate_mergers", 
+                name: "კორპორატიული შერწყმები", 
+                cost: 500000000, 
+                description: "კონკურენტი საცხობი ბიზნესების შეძენა", 
+                requirement: { producers: { corporation: 5 } }, 
+                effect: { producerMultiplier: { corporation: 2 } },
+                icon: "🤝"
+            },
+            { 
+                id: "global_brand", 
+                name: "გლობალური ბრენდის ცნობადობა", 
+                cost: 10000000000, 
+                description: "ქართული ცომეულის მსოფლიო სენსაციად ქცევა", 
+                requirement: { totalPastries: 1000000000 }, 
+                effect: { globalProducerMultiplier: 3 },
+                icon: "🌟"
+            },
+            { 
+                id: "auto_clicker", 
+                name: "ავტო-კლიკერი", 
+                cost: 50000, 
+                description: "ავტომატურად აკლიკებს წამში ერთხელ", 
+                requirement: { totalClicks: 1000 }, 
+                effect: { special: "autoClicker" },
+                icon: "🖱️"
+            },
+            { 
+                id: "auto_clicker_speed", 
+                name: "სწრაფი ავტო-კლიკერი", 
+                cost: 500000, 
+                description: "აორმაგებს ავტო-კლიკერის სიჩქარეს", 
+                requirement: { upgrades: ["auto_clicker"] }, 
+                effect: { autoClickerSpeed: 2 },
+                icon: "⚡"
+            },
+            { 
+                id: "special_ability", 
+                name: "ქართული სუფრის რეჟიმი", 
+                cost: 1000000, 
+                description: "გააქტიურეთ სპეციალური უნარი 10x წარმოებისთვის 10 წამის განმავლობაში", 
+                requirement: { totalPastries: 500000 }, 
+                effect: { special: "specialAbility" },
+                icon: "🎉"
+            }
         ];
         
         // Initialize upgrades in game state
@@ -404,60 +1763,470 @@
             game.upgrades[upgrade.id] = { purchased: false, unlocked: false };
         });
         
+        // Define special kitchen items
+        const specialItemTypes = [
+            {
+                id: "saperavi_wine",
+                name: "საფერავის ღვინო",
+                cost: 100000,
+                description: "ტრადიციული ქართული წითელი ღვინო, რომელიც აუმჯობესებს მცხობელების განწყობას",
+                effect: { producerBoost: 0.05 },
+                maxOwned: 5,
+                icon: "🍷"
+            },
+            {
+                id: "spice_mix",
+                name: "ქართული სანელებლების ნაკრები",
+                cost: 250000,
+                description: "სპეციალური სანელებლების ნაზავი, რომელიც აუმჯობესებს ცომეულის გემოს",
+                effect: { clickBoost: 0.1 },
+                maxOwned: 5,
+                icon: "🌶️"
+            },
+            {
+                id: "clay_pot",
+                name: "ტრადიციული თიხის ქოთანი",
+                cost: 500000,
+                description: "ავთენტური სამზარეულო ჭურჭელი განსაკუთრებული რეცეპტებისთვის",
+                effect: { producerBoost: 0.1, specificProducer: "master" },
+                maxOwned: 3,
+                icon: "🫕"
+            },
+            {
+                id: "family_recipe",
+                name: "ოჯახური რეცეპტების წიგნი",
+                cost: 1000000,
+                description: "უძველესი ოჯახური რეცეპტები, რომლებიც თაობებში გადაეცემა",
+                effect: { allBoost: 0.05 },
+                maxOwned: 3,
+                icon: "📜"
+            },
+            {
+                id: "special_oven",
+                name: "ტონე (ტრადიციული ღუმელი)",
+                cost: 2500000,
+                description: "ავთენტური ქართული თიხის ღუმელი სრულყოფილი გამოცხობისთვის",
+                effect: { producerBoost: 0.15, specificProducer: "oven" },
+                maxOwned: 3,
+                icon: "🔥"
+            },
+            {
+                id: "supra_table",
+                name: "სუფრის სერვირება",
+                cost: 10000000,
+                description: "ტრადიციული სადღესასწაულო სუფრა, რომელიც ზრდის მთლიან წარმოებას",
+                effect: { allBoost: 0.1 },
+                maxOwned: 2,
+                icon: "🍽️"
+            },
+            {
+                id: "tamada",
+                name: "თამადა",
+                cost: 50000000,
+                description: "ტრადიციული ქართული თამადა, რომელიც აუმჯობესებს განწყობას",
+                effect: { allBoost: 0.2 },
+                maxOwned: 1,
+                icon: "🥂"
+            }
+        ];
+        
+        // Initialize special items in game state
+        specialItemTypes.forEach(item => {
+            game.specialItems[item.id] = { count: 0, unlocked: false };
+        });
+        
         // Define achievements
         const achievementTypes = [
-            { id: "first_pastry", name: "First Bake", description: "Bake your first pastry", requirement: { totalPastries: 1 } },
-            { id: "ten_pastries", name: "Getting Started", description: "Bake 10 pastries", requirement: { totalPastries: 10 } },
-            { id: "hundred_pastries", name: "Hobby Baker", description: "Bake 100 pastries", requirement: { totalPastries: 100 } },
-            { id: "thousand_pastries", name: "Professional Baker", description: "Bake 1,000 pastries", requirement: { totalPastries: 1000 } },
-            { id: "million_pastries", name: "Pastry Tycoon", description: "Bake 1,000,000 pastries", requirement: { totalPastries: 1000000 } },
-            { id: "first_hire", name: "First Employee", description: "Hire your first baker", requirement: { producerCount: { apprentice: 1 } } },
-            { id: "baker_army", name: "Baker Army", description: "Have 50 total staff", requirement: { totalProducers: 50 } },
-            { id: "upgrade_master", name: "Upgrade Master", description: "Purchase 5 upgrades", requirement: { totalUpgrades: 5 } },
-            { id: "pastry_empire", name: "Pastry Empire", description: "Own every producer type", requirement: { allProducerTypes: true } },
-            { id: "speed_demon", name: "Speed Demon", description: "Reach 1,000 pastries per second", requirement: { moneyPerSecond: 1000 } }
+            { 
+                id: "first_pastry", 
+                name: "პირველი გამოცხობა", 
+                description: "გამოაცხვე პირველი ცომეული", 
+                requirement: { totalPastries: 1 },
+                icon: "🥮"
+            },
+            { 
+                id: "ten_pastries", 
+                name: "დაწყება", 
+                description: "გამოაცხვე 10 ცომეული", 
+                requirement: { totalPastries: 10 },
+                icon: "🥮"
+            },
+            { 
+                id: "hundred_pastries", 
+                name: "მოყვარული მცხობელი", 
+                description: "გამოაცხვე 100 ცომეული", 
+                requirement: { totalPastries: 100 },
+                icon: "🥮"
+            },
+            { 
+                id: "thousand_pastries", 
+                name: "პროფესიონალი მცხობელი", 
+                description: "გამოაცხვე 1,000 ცომეული", 
+                requirement: { totalPastries: 1000 },
+                icon: "🥮"
+            },
+            { 
+                id: "million_pastries", 
+                name: "საცხობის მაგნატი", 
+                description: "გამოაცხვე 1,000,000 ცომეული", 
+                requirement: { totalPastries: 1000000 },
+                icon: "🥮"
+            },
+            { 
+                id: "billion_pastries", 
+                name: "საცხობის მოგული", 
+                description: "გამოაცხვე 1,000,000,000 ცომეული", 
+                requirement: { totalPastries: 1000000000 },
+                icon: "🥮"
+            },
+            { 
+                id: "first_hire", 
+                name: "პირველი თანამშრომელი", 
+                description: "დაიქირავე პირველი მცხობელი", 
+                requirement: { producerCount: { apprentice: 1 } },
+                icon: "👨‍🍳"
+            },
+            { 
+                id: "baker_army", 
+                name: "მცხობელების არმია", 
+                description: "გყავდეს 50 თანამშრომელი ჯამში", 
+                requirement: { totalProducers: 50 },
+                icon: "👥"
+            },
+            { 
+                id: "baker_legion", 
+                name: "მცხობელების ლეგიონი", 
+                description: "გყავდეს 100 თანამშრომელი ჯამში", 
+                requirement: { totalProducers: 100 },
+                icon: "👥"
+            },
+            { 
+                id: "upgrade_master", 
+                name: "გაუმჯობესების ოსტატი", 
+                description: "შეიძინე 5 გაუმჯობესება", 
+                requirement: { totalUpgrades: 5 },
+                icon: "⬆️"
+            },
+            { 
+                id: "upgrade_guru", 
+                name: "გაუმჯობესების გურუ", 
+                description: "შეიძინე 10 გაუმჯობესება", 
+                requirement: { totalUpgrades: 10 },
+                icon: "⬆️"
+            },
+            { 
+                id: "pastry_empire", 
+                name: "საცხობის იმპერია", 
+                description: "გქონდეს ყველა ტიპის მწარმოებელი", 
+                requirement: { allProducerTypes: true },
+                icon: "🏛️"
+            },
+            { 
+                id: "speed_demon", 
+                name: "სიჩქარის დემონი", 
+                description: "მიაღწიე 1,000 ცომეულს წამში", 
+                requirement: { moneyPerSecond: 1000 },
+                icon: "⚡"
+            },
+            { 
+                id: "click_machine", 
+                name: "კლიკის მანქანა", 
+                description: "დააკლიკე 1,000-ჯერ", 
+                requirement: { totalClicks: 1000 },
+                icon: "👆"
+            },
+            { 
+                id: "click_god", 
+                name: "კლიკის ღმერთი", 
+                description: "დააკლიკე 10,000-ჯერ", 
+                requirement: { totalClicks: 10000 },
+                icon: "👆"
+            },
+            { 
+                id: "prestiged", 
+                name: "ახალი დასაწყისი", 
+                description: "გამოიყენე პრესტიჟი პირველად", 
+                requirement: { prestigeLevel: 1 },
+                icon: "✨"
+            },
+            { 
+                id: "prestige_master", 
+                name: "პრესტიჟის ოსტატი", 
+                description: "მიაღწიე პრესტიჟის მე-5 დონეს", 
+                requirement: { prestigeLevel: 5 },
+                icon: "💫"
+            },
+            { 
+                id: "collector", 
+                name: "კოლექციონერი", 
+                description: "გქონდეს 3 სპეციალური სამზარეულოს ნივთი", 
+                requirement: { totalSpecialItems: 3 },
+                icon: "🍽️"
+            },
+            { 
+                id: "master_collector", 
+                name: "მთავარი კოლექციონერი", 
+                description: "გქონდეს ყველა სპეციალური სამზარეულოს ნივთი", 
+                requirement: { allSpecialItems: true },
+                icon: "🏆"
+            },
+            { 
+                id: "pastry_variety", 
+                name: "ცომეულის მრავალფეროვნება", 
+                description: "გახსენი 5 სხვადასხვა ტიპის ცომეული", 
+                requirement: { pastryLevel: 5 },
+                icon: "🥐"
+            }
         ];
         
         // Initialize achievements in game state
         achievementTypes.forEach(achievement => {
-            game.achievements[achievement.id] = { earned: false, displayed: false };
+            game.achievements[achievement.id] = { earned: false, displayed: false, progress: 0 };
         });
+        
+        // Define prestige options
+        const prestigeOptions = [
+            {
+                id: "basic",
+                name: "ტრადიციული პრესტიჟი",
+                description: "ჩამოაყალიბეთ თქვენი პროგრესი, მაგრამ მიიღეთ მუდმივი გამრავლება მომავალი თამაშებისთვის.",
+                minPastries: 1000000,
+                pointMultiplier: 1
+            },
+            {
+                id: "producers",
+                name: "მცხობელების დინასტია",
+                description: "განულდით, მაგრამ დაიწყეთ ზოგიერთი მწარმოებლით და უფრო მაღალი გამრავლებით.",
+                minPastries: 10000000,
+                pointMultiplier: 0.8,
+                specialEffect: { startingProducers: { apprentice: 5, baker: 2 } }
+            },
+            {
+                id: "clicking",
+                name: "ოსტატის ხელი",
+                description: "განულდით დამატებითი გაძლიერებით კლიკზე.",
+                minPastries: 5000000,
+                pointMultiplier: 0.9,
+                specialEffect: { startingClickMultiplier: 3 }
+            }
+        ];
+        
+        // Define game events
+        const eventTypes = [
+            {
+                id: "supra",
+                name: "სუფრის ფესტივალი",
+                description: "აღნიშნეთ ქართული სტუმართმოყვარეობა! ყველა ცომეული 50%-ით მეტი ღირებულებისაა!",
+                duration: 3600, // 1 hour in seconds
+                effect: { allMultiplier: 1.5 }
+            },
+            {
+                id: "wineHarvest",
+                name: "ღვინის რთველის სეზონი",
+                description: "ღვინის სეზონია! მცხობელები 75%-ით სწრაფად მუშაობენ ქართული ღვინით!",
+                duration: 1800, // 30 minutes in seconds
+                effect: { producerMultiplier: 1.75 }
+            },
+            {
+                id: "churchkhela",
+                name: "ჩურჩხელის დღე",
+                description: "ტრადიციული ტკბილეულის დამზადების დღე! კლიკი ორჯერ უფრო ეფექტურია!",
+                duration: 900, // 15 minutes in seconds
+                effect: { clickMultiplier: 2 }
+            }
+        ];
+        
+        // Define statistics tracked
+        const statisticsTypes = [
+            { id: "totalClicks", name: "ჯამური კლიკები", format: "number" },
+            { id: "totalPastries", name: "ჯამური გამომცხვარი ცომეული", format: "number" },
+            { id: "totalMoneyEarned", name: "ჯამური გამომუშავებული ლარი", format: "money" },
+            { id: "prestigeLevel", name: "პრესტიჟის დონე", format: "number" },
+            { id: "totalTimePlayed", name: "ჯამური თამაშის დრო", format: "time" },
+            { id: "achievementsEarned", name: "მოპოვებული მიღწევები", format: "ratio", getValue: () => {
+                let earned = 0;
+                for (const id in game.achievements) {
+                    if (game.achievements[id].earned) earned++;
+                }
+                return `${earned}/${achievementTypes.length}`;
+            }},
+            { id: "maxPastriesPerSecond", name: "მაქსიმალური ცომეული/წამში", format: "number", getValue: () => {
+                return Math.max(game.maxPastriesPerSecond || 0, game.moneyPerSecond).toFixed(2);
+            }},
+            { id: "maxClickValue", name: "მაქსიმალური კლიკის ღირებულება", format: "number", getValue: () => {
+                const currentPastry = pastryTypes[game.currentPastryLevel];
+                return Math.max(game.maxClickValue || 0, currentPastry.value * game.clickMultiplier).toFixed(2);
+            }},
+            { id: "totalProducers", name: "მწარმოებლების ჯამური რაოდენობა", format: "number", getValue: () => {
+                let total = 0;
+                for (const id in game.producers) {
+                    total += game.producers[id].count;
+                }
+                return total;
+            }},
+            { id: "fastestPrestige", name: "უსწრაფესი პრესტიჟი", format: "time", getValue: () => {
+                return formatTime(game.fastestPrestige || 0);
+            }}
+        ];
+        
+        // Sound effects
+        const sounds = {
+            click: new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABGgD///////////////////////////////////////////////////////////////////8AAAA8TEFNRTMuMTAwBK8AAAAAAAAAABUgJAG+QQAB4AAAARrGDRZPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//vQZAAAAZsA0eUEAAgAAA/woAABG02Tp7mWgCMAACT3AAAEUcWhMGhGKgQPA8DwPKBj4Hgh7+sHz/Bj+DICB+h8Hg+fy29Q/UADwAf/9OAn//ag/9QEvf/whCDhkNGQbMtIJmYkIMgmFgHASMSYdDRmKChYZgaIyHBIFAEiUAkMgaAxBgRLgAjgDRGAyLA2TEvQBKiEgwFlUJ0NHkDHEARYTSqFI1Y7JQMHVHhANh0TRAECILCKAoUJYHoRLy9mxdB1bAqWGbFBSmBwCGQK1WlKI1pOgFSiuZ6qA4HTLVdVN1Ql0I0CqdLgdXodX3Kpav1LW/qtbt//rdcHUa1q9aIQIA=='),
+            buy: new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABGgD///////////////////////////////////////////////////////////////////8AAAA8TEFNRTMuMTAwBK8AAAAAAAAAABUgJAG+QQAB4AAAARrGDRZPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//vQZAAAAmgA2eUEAAoAAA/woAABG82Tp7mWgCM4ACT3AAAEVLCYHBGJAQPA8DwPKBj4Hgh7+sHz/Bj+DICDn0PB4Q+S29XdQAQAP/+nAT//tQf+oCXv/+EIOGNMGgAxpoJuZkIQgGGQEAEZEwmDRmJCpYZgUHSHBgFAKRIAwGQPBYigJJoAGEAyHyGNgDNiUICmBCwOChdBkMHdDhlAEiJdmBYXWOyUDB2iIIhsNiUHAgJAoQwEhpKhcCJeLtaJoOroCSozYoKFwOCRKBau0pRGtJ0AqUVzPVQHA6ZarqpuqEugehFU6XA6vQ6vuVS1fqWt/Va3b/+t1wdRrWr1ohAgA='),
+            upgrade: new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABGgD///////////////////////////////////////////////////////////////////8AAAA8TEFNRTMuMTAwBK8AAAAAAAAAABUgJAG+QQAB4AAAARrGDRZPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//vQZAAAAp8AzeUEAAgAAA/woAABGr2Pp7mWgCMgACT3AAAEN2QiHQgFAICB4HgeB5QMfA8EPf1g+f4MfgZAQc+h4PCHyX3q7qABIAP//TgJ//2oP/UBL3//CEDQZDA4JmYkEzMTCEGAcAQBDImGwaM6IULDMDQwQwNAgCwGhsCSGA1JYCyAAZRARmQDVhDJcBxAJEBoMjIbMwQDyFRkDiqEQwGyzGC6jArEwdDofDolAoHBIDCADCaJYOQDFSaBoMoAByYzAuXB4JAoEABK9KkrCMuAtNJTS8HVsF1eCQdGiHJPLgHocj8wAgA0FFcvZJVNf////9fb///uSSVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ=='),
+            achievement: new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAADAAAJnAHExMTExMTExMTExMTExMTExMTExMTExMTE8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8P////////////////////////////////8AAAA8TEFNRTMuMTAwBK8AAAAAAAAAABUgJAG+QQAB4AAAAZzeFV8MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uwZAAAAtcA19kAAAYAAA/wAAABC1gFI0YwAAFwgGQkxggJwAREAAIhxG+Y8BqADk4gDIAkQLBojgQZGY+EB/Mew93aAO///CEJAMgmfmJGY4PhoJACBYQgMmohEBnwzARgAAogJAdBAwFAJMDwKMDASFgEgUYPAOYrgGGBkHGBQBmA4BGAYAAAL7aV21X0j9EySo9gJGAgQhQCAQwKBoKCgUAUDIIJQMk2cOA4wJA0UDheAVNKl6DBUZCVzAoKFx2MJE4MhgNkYBQMIwC1SmhCXG1N4wDFgwQgMMDJTIwoJ0lDoTCUCRgKFBZBkICE2MfQfMEgAHAEVkiWcpptTk20dIqAEmBDOeGZEBwURDQWD0pAQFigwAgCCAUBjAwFSCG9YOAEAMwOBIWGEJAEwpBgKFw8GikFiiIh+t21S9TDApLYSjoxSDAB3kQgHAuuEiEf8oc7NXEZt3Kp////0dJ//V///mFu1QMDAyDQ4EAcCgMBQEAgDPyJESJEiRIkSJEQiCP/SJEQREQR//xH/SP8R//+I/8R//+kf/////////+IiCpVVVVVVQAA'),
+            special: new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAAFAAAJLQCenp6enp6enp6enp6enp6enp6enp6enp6enp7IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjv7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7/////////////////////////////////8AAAA8TEFNRTMuMTAwBK8AAAAAAAAAABUgJAIGQQAB4AAACSvHUvJGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//vAZAAAAr4Ax9GAAAYrYBm6MAACDUQHI0ZYAAGFAGP8wgAD/DgAAQQIiKAQf8EJPnygAECEHOSgP8+SA5/+eP5//yiZ/nAff//BwH//IACDBMFxOAoCQYYuAmGAIBQeAKA0CQGCICAwBQJMHwBAGBIDQAAWYEAEYGAUZIgeAkBIOAIAAdgAIAEZoLfpVUPVIoP0FcwWBoEBUwMAQwUBA1CzBIETITQTO06IMMFQPMCgUMBAIMBkDMVVOMQ2dMJgPMJQvMFQJMA0OMQBUMBCUfzAgFi4CGAYOGAQCGE4FmIY5mJAWGNAcGQydHhp0mIpXGBxNmEIPmxSSmGI2GAAlAIDRc2GQomQAEgYZHQoAzAEBgYAw1XgIMkMCEKmMQoL2sJ0YGQoJCA2QQIMAAXMI1rMOgXBgMFQ8A1eLgQWAQwOAcxi2QwgAMBAdMBwMCgBMEQRMJwOMVBaMoS8MAAEBQUMAQGAgYGBgMGBYCAiJgoFQ4nA+iAwYB4OAgcKAxJhUHlcVxYH0bHiYHnSGSuCAOoEAEP1+MCIwLYq6Y0Aw+jnRGDMAEBIxcIzECLMCGswARgoJisFVnohwgFtTKCTCEP0/wwGMrH8zZkzHgAMCgcwaKTAYoMCBsDAVAgEhQuYEDJgYzGCp8YHiAsDgSMoKowOGTBYJMGgcUDDAQBMCQowUYzGxnCQHMNxEwkNjA4AAAoChKY2DRixnGCwAYBDBggAmLkZZuaOgZiAkmGwGIAwhiRIXZZKaGKwsSQCkIDVS44EwuAplLlEIBDI5VjiwgBjXOdSIwGUkCQQEFxgJM9URgAUBkxaA2ZFJHLkFEBMqAwp0UQPML3jgSEAJQ+YADHo5BIOmATRkEQYEFGEzhwHGBRoigdIGYEDGIhxgIUYVACmBgKTgcAICmYQwUNGFghgsIEDjAgAIhmmAjj63Mq//4OoKTJgDAeYCICnhgBiuOYpVnDQ5hmNiIVGCIygYMKAn4YwdvGXc5z1mbk4zGmEABQEGDJp3LMtJgaAMXThGAKoAgYVHDCQ////q5B8YVADByEhAgOggMMJAnmA0wZk5maQRilOD0DAIHDBIRVxhAAZJ7GnWxlBm95Ry/O5cJj3wc8DGkeBgbodXRnT8Zt1mCL5imqLSZgaWZw2GCjhgICb6snAkRlMmc0EGNaB3Smie5jrmZUamBQJqCmbN6GLvJnHKckTmS8Zm8EapKmhKRoWICpJnyoeKaHqMYswmK6JofcYGsmAQBiiMYDCmMJxgrGYqcAgBEAIQRgGCYXEH0DpGEAmAAYRGKrRCWZVEmFhhpkZ4AGMNRiUAZ1JmDRo7aQGbYxhcSLYGCwQNAhTGNCxi0MNAmMxzDCQQxkJNbOzH3E5WLMQKjMQIwOEMPWzADMdtgYFJIEGYXEGG1pmC4QCy8XLxwWGAOYQoiIepiUmCYXQQMNhzRFcxASM1JTDUoBABSuXRyMNhTC0Ux8PMKAT3lgOGJCKBwONpEiRMBgLMx0wZAEoLa4tC4DEYIEYeCGFAJhmmHI4DCDF0Unh+gFMAU4ExQGApowA9GZADGQWQGINQyJGULJjLGdKgGBUZiQSbeiGAwxioKAsBJgoIfQXBILCIjBgAAxm1O6lTGA0Jo5mZSZmQGZEJmggRgqmDDxyBMZawmfC5jikFgZBgUGm2cRrGgYkCmXGo9JiIgZE3GKmpkKCZkimksRvGcaYjGVsBCwV0qYFmCABnp2ZIxgECYqOGHE5hxAaLtmFCZiCAB4KCwmAYCdUMINDAMcDAyM8jFuPVgUaC5NXyLEtfV0Hod83BuGM8z2YGyGzU2mOgzpLNckjKbwzA/GW+FtTQZQLCoTB/A3mLC9/G6OAzO4MUQDKZsaXBlLpMzxhsQBQUWmmW2uY7lmZw5h0AYLAGiY5hFQYxWBGOYjHmAhhgCOYrBmXgQYDGx1pgQYmHDaSHGAqOZnHlQZgqOEUmFQ5iQBl7Yv+MvnYvGQPGQNGDU5jJWF9GGMGCX5lISb4TnZbgxIvAgYGCxdGlAIzFZZQ3FOeQxEFBwYGCR/GIgoFjQ8MQCJPRYKGCpRmDObhWmVlBjKWYe9GBJRlOSaLDGGnpgQcYMTjKd8aYmQEYCBGKJZgqAakgnhmZPWDErQOzTDI4wYdMAHTVR4wExMJBQCamVkKcCxAAAowpcMeETNZ0z1iDh0MRAj2Mcw0Aaa2aRMtVTJX8wYRMOhTJ4kzLXMTczGGkyRvH4MCB8QZDCPbswAAGSgAKA4dFbJVHRYTBZKMOXDqF0EAU+C0zBQJGTCCk8GgIZ0rKG4MfzGXoxoCMQYzL3IxSuMWFDBE4PjsHnxwxEfN5bjJBQw1WEwZLnowJAL2xgJLAIWCxgWWZFemQehiiMzQYJlQGf2BQ5fZYRBhYAYFkGAIEk24hCpOGgZVJwGCYlJnJAxRpM4HSJFMAezCMw06MMxSTMy4yOSEyDDLpAuYFKBCQYKlxbYdMzBdpI9YYKOYTLDBOMxmNMpEhYEMImTKcsxwSAwMWF21QMBQzLR8x1aMGDjGNMx4+MdKAKUmFRpihKYsWCJeYHEHCy5gEqAQiMnBwQkZKFogMZLniIGYgDGSjBhIMYgXGFJAEBAhRNAdzFoYz98ATwTINQ1YJB6EJ5X0AwtjTAITGCQEB9BwcCiAzFY4CDQkRAwILAYBCQdBwACYDBwQMIDgqKJNB0KhYIAEAQUFgF9/+5Bk5wP3OGK8PbjAALVL1526AABV4ZbidbhAAM6wLY3bQABfEAYIDABK+ZuNxdL/8kRDEpS5ZSk/LEqYlQFLRcVk3OeXZxfK6GCOj8aBILDCJVDEkw0AAAABChQDBgaBz0ChUFgwFNYmDoaAgOBhwVBZTGQWDwkHxUEjAMBwuE4sByGb7gwNBIHBGTgAG8smwUBQEFQRFQqJTZNB0JBAXDZyHw+CguEw6JicshIUE4sCDMNn46aBcNCIwL0O0uf/kP0wAl2ZrUapCgwEA8wEAhJi8xN//BQRhgNGQcLBgGCRkMC5gKA7IXOggGxLKmpqd/+ZDFBbncDgsHwsPo3qcqo67AYBhUNCOJiZL///8tWSNp2JKiBp4YGF5gu////WXS+VykWBEBDAUE2SDggDDAbQvPf///5ZIpGaLARDg2DW4//1erK/zzBNa////81STLUGEExJEAYEVCYAv///9bT4///////////yEkEMplMplVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==')
+        };
         
         // DOM elements
         const elements = {
+            // Main containers
+            mainMenu: document.getElementById('main-menu'),
+            gameInterface: document.getElementById('game-interface'),
+            
+            // Navigation tabs
+            navTabs: document.querySelectorAll('.nav-tab'),
+            
+            // Game views
+            gameView: document.getElementById('game-view'),
+            shopView: document.getElementById('shop-view'),
+            upgradesView: document.getElementById('upgrades-view'),
+            achievementsView: document.getElementById('achievements-view'),
+            prestigeView: document.getElementById('prestige-view'),
+            statisticsView: document.getElementById('statistics-view'),
+            settingsView: document.getElementById('settings-view'),
+            
+            // Main menu buttons
+            continueBtn: document.getElementById('continue-btn'),
+            newGameBtn: document.getElementById('new-game-btn'),
+            importBtn: document.getElementById('import-btn'),
+            creditsBtn: document.getElementById('credits-btn'),
+            
+            // Game stats
             money: document.getElementById('money'),
+            moneyShop: document.getElementById('money-shop'),
+            moneyUpgrades: document.getElementById('money-upgrades'),
             pastriesPerSecond: document.getElementById('pastries-per-second'),
+            pastriesPerSecondShop: document.getElementById('pastries-per-second-shop'),
             totalPastries: document.getElementById('total-pastries'),
+            clickValue: document.getElementById('click-value'),
+            multiplier: document.getElementById('multiplier'),
+            
+            // Clicker elements
             clicker: document.getElementById('clicker'),
             pastryName: document.getElementById('pastry-name'),
             pastryValue: document.getElementById('pastry-value'),
+            pastryProgress: document.getElementById('pastry-progress'),
+            progressInfo: document.getElementById('progress-info'),
+            autoClickBtn: document.getElementById('auto-click-btn'),
+            autoClickIcon: document.getElementById('auto-click-icon'),
+            specialAbilityBtn: document.getElementById('special-ability-btn'),
+            
+            // Shop elements
             shopItems: document.getElementById('shop-items'),
+            shopItemsFull: document.getElementById('shop-items-full'),
+            buy1Btn: document.getElementById('buy-1'),
+            buy10Btn: document.getElementById('buy-10'),
+            buy100Btn: document.getElementById('buy-100'),
+            buyMaxBtn: document.getElementById('buy-max'),
+            
+            // Upgrades elements
             upgradeItems: document.getElementById('upgrade-items'),
-            achievementItems: document.getElementById('achievement-items'),
-            notification: document.getElementById('notification'),
+            upgradeItemsFull: document.getElementById('upgrade-items-full'),
+            purchasedUpgrades: document.getElementById('purchased-upgrades'),
+            upgradesOwned: document.getElementById('upgrades-owned'),
+            
+            // Special items
+            specialItems: document.getElementById('special-items'),
+            
+            // Achievements elements
+            achievementItems: document.getElementById('achievement-items-full'),
+            achievementsEarned: document.getElementById('achievements-earned'),
+            achievementsBonus: document.getElementById('achievements-bonus'),
+            
+            // Prestige elements
+            prestigePoints: document.getElementById('prestige-points'),
+            prestigeLevel: document.getElementById('prestige-level'),
+            prestigeMultiplier: document.getElementById('prestige-multiplier'),
+            newPrestigePoints: document.getElementById('new-prestige-points'),
+            nextMultiplier: document.getElementById('next-multiplier'),
+            prestigeOptions: document.getElementById('prestige-options'),
+            prestigeBtn: document.getElementById('prestige-btn'),
+            
+            // Statistics elements
+            totalTimePlayed: document.getElementById('total-time-played'),
+            totalClicks: document.getElementById('total-clicks'),
+            totalMoneyEarned: document.getElementById('total-money-earned'),
+            statisticsList: document.getElementById('statistics-list'),
+            
+            // Settings elements
+            soundToggle: document.getElementById('sound-toggle'),
+            notificationDuration: document.getElementById('notification-duration'),
+            clickIndicatorToggle: document.getElementById('click-indicator-toggle'),
+            numberFormat: document.getElementById('number-format'),
+            exportSaveBtn: document.getElementById('export-save-btn'),
+            importSaveBtn: document.getElementById('import-save-btn'),
+            hardResetBtn: document.getElementById('hard-reset-btn'),
+            backToMenuBtn: document.getElementById('back-to-menu-btn'),
+            
+            // Game actions
             saveBtn: document.getElementById('save-btn'),
-            loadBtn: document.getElementById('load-btn'),
-            resetBtn: document.getElementById('reset-btn')
+            exportBtn: document.getElementById('export-btn'),
+            resetBtn: document.getElementById('reset-btn'),
+            
+            // Notification
+            notification: document.getElementById('notification'),
+            
+            // Event banner
+            eventBanner: document.getElementById('event-banner'),
+            eventClose: document.getElementById('event-close'),
+            eventTimer: document.getElementById('event-timer'),
+            
+            // Modals
+            importModal: document.getElementById('import-modal'),
+            exportModal: document.getElementById('export-modal'),
+            creditsModal: document.getElementById('credits-modal'),
+            modalCloseBtns: document.querySelectorAll('.modal-close, .modal-close-btn'),
+            importConfirm: document.getElementById('import-confirm'),
+            copyExport: document.getElementById('copy-export'),
+            exportCode: document.getElementById('export-code'),
+            importCode: document.getElementById('import-code')
         };
-        
-        // Set initial pastry image
-        elements.clicker.style.backgroundImage = `url('${pastryTypes[0].image}')`;
         
         // Format large numbers
         function formatNumber(num) {
-            if (num >= 1000000) {
-                return (num / 1000000).toFixed(2) + 'M';
-            } else if (num >= 1000) {
-                return (num / 1000).toFixed(2) + 'K';
+            if (game.settings.numberFormat === 'scientific' && num >= 1000) {
+                return num.toExponential(2);
+            } else if (game.settings.numberFormat === 'compact') {
+                if (num >= 1000000000000) {
+                    return (num / 1000000000000).toFixed(2) + 'T';
+                } else if (num >= 1000000000) {
+                    return (num / 1000000000).toFixed(2) + 'B';
+                } else if (num >= 1000000) {
+                    return (num / 1000000).toFixed(2) + 'M';
+                } else if (num >= 1000) {
+                    return (num / 1000).toFixed(2) + 'K';
+                } else {
+                    return num.toFixed(2);
+                }
             } else {
                 return num.toFixed(2);
             }
+        }
+        
+        // Format time (seconds to HH:MM:SS)
+        function formatTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
         
         // Add money and update display
         function addMoney(amount) {
             game.money += amount;
             game.totalPastries += amount;
+            game.totalMoneyEarned += amount;
             updateDisplay();
             checkUpgradesUnlocked();
             checkAchievements();
@@ -467,22 +2236,109 @@
         // Update the display with current game state
         function updateDisplay() {
             elements.money.textContent = formatNumber(game.money);
+            elements.moneyShop.textContent = formatNumber(game.money);
+            elements.moneyUpgrades.textContent = formatNumber(game.money);
             elements.pastriesPerSecond.textContent = formatNumber(game.moneyPerSecond);
+            elements.pastriesPerSecondShop.textContent = formatNumber(game.moneyPerSecond);
             elements.totalPastries.textContent = formatNumber(game.totalPastries);
+            elements.totalClicks.textContent = formatNumber(game.totalClicks);
+            elements.totalMoneyEarned.textContent = formatNumber(game.totalMoneyEarned);
+            
+            // Update click value
+            const currentPastry = pastryTypes[game.currentPastryLevel];
+            const clickValue = currentPastry.value * game.clickMultiplier;
+            elements.clickValue.textContent = formatNumber(clickValue);
+            
+            // Update multiplier display
+            elements.multiplier.textContent = (game.prestigeMultiplier * 
+                (game.events.active ? game.events.multiplier : 1)).toFixed(2) + 'x';
             
             // Update current pastry info
-            const currentPastry = pastryTypes[game.currentPastryLevel];
             elements.pastryName.textContent = currentPastry.name;
-            elements.pastryValue.textContent = `+${formatNumber(currentPastry.value * game.clickMultiplier)} per click`;
+            elements.pastryValue.textContent = `+${formatNumber(clickValue)} თითო კლიკზე`;
             
+            // Update progress to next pastry
+            if (game.currentPastryLevel < pastryTypes.length - 1) {
+                const nextPastry = pastryTypes[game.currentPastryLevel + 1];
+                const requiredPastries = nextPastry.value * 20;
+                const progress = Math.min(1, game.totalPastries / requiredPastries) * 100;
+                elements.pastryProgress.style.width = `${progress}%`;
+                elements.progressInfo.textContent = `შემდეგი ცომეული: ${formatNumber(game.totalPastries)}/${formatNumber(requiredPastries)}`;
+            } else {
+                elements.pastryProgress.style.width = "100%";
+                elements.progressInfo.textContent = "ყველა ცომეული გახსნილია!";
+            }
+            
+            // Update upgrades owned
+            let upgradesOwned = 0;
+            for (const id in game.upgrades) {
+                if (game.upgrades[id].purchased) upgradesOwned++;
+            }
+            elements.upgradesOwned.textContent = upgradesOwned;
+            
+            // Update achievements earned
+            let achievementsEarned = 0;
+            for (const id in game.achievements) {
+                if (game.achievements[id].earned) achievementsEarned++;
+            }
+            elements.achievementsEarned.textContent = `${achievementsEarned}/${achievementTypes.length}`;
+            
+            // Update achievement bonus
+            const achievementBonus = Math.min(achievementsEarned * 2, 50); // 2% per achievement, max 50%
+            elements.achievementsBonus.textContent = `${achievementBonus}%`;
+            
+            // Update prestige information
+            elements.prestigePoints.textContent = game.prestigePoints;
+            elements.prestigeLevel.textContent = game.prestigeLevel;
+            elements.prestigeMultiplier.textContent = game.prestigeMultiplier.toFixed(2) + 'x';
+            
+            // Calculate new prestige points
+            const newPrestigePoints = calculatePrestigePoints();
+            elements.newPrestigePoints.textContent = '+' + newPrestigePoints;
+            
+            // Calculate next multiplier
+            const nextMultiplier = 1 + ((game.prestigePoints + newPrestigePoints) * 0.1);
+            elements.nextMultiplier.textContent = nextMultiplier.toFixed(2) + 'x';
+            
+            // Enable/disable prestige button
+            elements.prestigeBtn.disabled = newPrestigePoints <= 0;
+            
+            // Update auto clicker button text
+            if (elements.autoClickBtn.style.display !== 'none') {
+                elements.autoClickBtn.textContent = `ავტო-კლიკი: ${game.autoClicker.enabled ? 'ჩართული' : 'გამორთული'}`;
+            }
+            
+            // Update special ability button
+            if (game.specialAbility.unlocked) {
+                elements.specialAbilityBtn.style.display = 'inline-block';
+                if (game.specialAbility.active) {
+                    elements.specialAbilityBtn.textContent = `აქტიურია (${Math.ceil(game.specialAbility.duration - (Date.now() - game.specialAbility.lastUsed) / 1000)}წმ)`;
+                    elements.specialAbilityBtn.disabled = true;
+                } else {
+                    const cooldownRemaining = Math.ceil((game.specialAbility.cooldown * 1000 - (Date.now() - game.specialAbility.lastUsed)) / 1000);
+                    if (cooldownRemaining > 0) {
+                        elements.specialAbilityBtn.textContent = `გაგრილება (${cooldownRemaining}წმ)`;
+                        elements.specialAbilityBtn.disabled = true;
+                    } else {
+                        elements.specialAbilityBtn.textContent = 'სპეციალური უნარი';
+                        elements.specialAbilityBtn.disabled = false;
+                    }
+                }
+            }
+            
+            // Update shop displays
             updateShop();
             updateUpgrades();
             updateAchievements();
+            updateSpecialItems();
+            updatePrestigeOptions();
+            updateStatistics();
         }
         
         // Update shop items display
         function updateShop() {
             elements.shopItems.innerHTML = '';
+            elements.shopItemsFull.innerHTML = '';
             
             producerTypes.forEach(producer => {
                 const producerState = game.producers[producer.id];
@@ -490,31 +2346,92 @@
                 // Skip if not unlocked yet
                 if (!producerState.unlocked) return;
                 
-                const cost = producer.baseCost * Math.pow(1.15, producerState.count);
+                const cost = calculateProducerCost(producer.id, game.settings.buyMode);
                 const output = producer.baseOutput * producerState.multiplier;
                 const canAfford = game.money >= cost;
                 
-                const itemElement = document.createElement('div');
-                itemElement.className = `shop-item ${canAfford ? '' : 'disabled'}`;
-                itemElement.innerHTML = `
-                    <div class="shop-item-name">${producer.name}</div>
-                    <div class="shop-item-cost">${formatNumber(cost)} ლარი</div>
-                    <div class="shop-item-owned">Owned: ${producerState.count} (${formatNumber(output)} each)</div>
-                    <div class="shop-item-desc">${producer.description}</div>
-                `;
-                
-                if (canAfford) {
-                    itemElement.addEventListener('click', () => buyProducer(producer.id));
+                // Create item for main view
+                if (elements.shopItems) {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = `shop-item ${canAfford ? '' : 'disabled'}`;
+                    
+                    let iconHtml = '';
+                    if (producer.icon.startsWith('http')) {
+                        iconHtml = `<div class="apprentice-img" style="background-image: url('${producer.icon}');"></div>`;
+                    } else {
+                        iconHtml = `<span class="item-icon">${producer.icon}</span>`;
+                    }
+                    
+                    itemElement.innerHTML = `
+                        <div class="item-header">
+                            <div class="item-name">${iconHtml} ${producer.name}</div>
+                            <div class="item-cost">${formatNumber(cost)} ₾</div>
+                        </div>
+                        <div class="item-desc">${producer.description}</div>
+                        <div class="shop-item-stats">
+                            <div class="shop-item-owned">რაოდენობა: ${producerState.count}</div>
+                            <div class="shop-item-production">+${formatNumber(output)} თითოეული</div>
+                        </div>
+                    `;
+                    
+                    if (canAfford) {
+                        itemElement.addEventListener('click', () => buyProducer(producer.id, game.settings.buyMode));
+                    }
+                    
+                    elements.shopItems.appendChild(itemElement);
                 }
                 
-                elements.shopItems.appendChild(itemElement);
+                // Create item for shop view
+                if (elements.shopItemsFull) {
+                    const fullItemElement = document.createElement('div');
+                    fullItemElement.className = `shop-item ${canAfford ? '' : 'disabled'}`;
+                    
+                    let iconHtml = '';
+                    if (producer.icon.startsWith('http')) {
+                        iconHtml = `<div class="apprentice-img" style="background-image: url('${producer.icon}');"></div>`;
+                    } else {
+                        iconHtml = `<span class="item-icon">${producer.icon}</span>`;
+                    }
+                    
+                    fullItemElement.innerHTML = `
+                        <div class="item-header">
+                            <div class="item-name">${iconHtml} ${producer.name}</div>
+                            <div class="item-cost">${formatNumber(cost)} ₾</div>
+                        </div>
+                        <div class="item-desc">${producer.description}</div>
+                        <div class="shop-item-stats">
+                            <div class="shop-item-owned">რაოდენობა: ${producerState.count}</div>
+                            <div class="shop-item-production">+${formatNumber(output)} თითოეული</div>
+                            <div class="shop-item-total">ჯამური: +${formatNumber(output * producerState.count)}/წმ</div>
+                        </div>
+                    `;
+                    
+                    if (canAfford) {
+                        fullItemElement.addEventListener('click', () => buyProducer(producer.id, game.settings.buyMode));
+                        
+                        // Add buy max button
+                        const buyMaxBtn = document.createElement('div');
+                        buyMaxBtn.className = 'shop-buy-max';
+                        buyMaxBtn.textContent = 'ყიდვა მაქს.';
+                        buyMaxBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            buyProducer(producer.id, 'max');
+                        });
+                        fullItemElement.appendChild(buyMaxBtn);
+                    }
+                    
+                    elements.shopItemsFull.appendChild(fullItemElement);
+                }
             });
         }
         
         // Update upgrades display
         function updateUpgrades() {
-            elements.upgradeItems.innerHTML = '';
+            if (elements.upgradeItems) elements.upgradeItems.innerHTML = '';
+            if (elements.upgradeItemsFull) elements.upgradeItemsFull.innerHTML = '';
+            if (elements.purchasedUpgrades) elements.purchasedUpgrades.innerHTML = '';
             
+            // Display available upgrades
             upgradeTypes.forEach(upgrade => {
                 const upgradeState = game.upgrades[upgrade.id];
                 
@@ -523,57 +2440,290 @@
                 
                 const canAfford = game.money >= upgrade.cost;
                 
-                const itemElement = document.createElement('div');
-                itemElement.className = `upgrade-item ${canAfford ? '' : 'disabled'}`;
-                itemElement.innerHTML = `
-                    <div class="upgrade-name">${upgrade.name}</div>
-                    <div class="upgrade-cost">${formatNumber(upgrade.cost)} ლარი</div>
-                    <div class="upgrade-desc">${upgrade.description}</div>
-                `;
-                
-                if (canAfford) {
-                    itemElement.addEventListener('click', () => buyUpgrade(upgrade.id));
+                // Create item for main view
+                if (elements.upgradeItems) {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = `upgrade-item ${canAfford ? '' : 'disabled'}`;
+                    itemElement.innerHTML = `
+                        <div class="item-header">
+                            <div class="item-name">${upgrade.icon} ${upgrade.name}</div>
+                            <div class="item-cost">${formatNumber(upgrade.cost)} ₾</div>
+                        </div>
+                        <div class="item-desc">${upgrade.description}</div>
+                    `;
+                    
+                    if (canAfford) {
+                        itemElement.addEventListener('click', () => buyUpgrade(upgrade.id));
+                    }
+                    
+                    elements.upgradeItems.appendChild(itemElement);
                 }
                 
-                elements.upgradeItems.appendChild(itemElement);
+                // Create item for upgrades view
+                if (elements.upgradeItemsFull) {
+                    const fullItemElement = document.createElement('div');
+                    fullItemElement.className = `upgrade-item ${canAfford ? '' : 'disabled'}`;
+                    fullItemElement.innerHTML = `
+                        <div class="item-header">
+                            <div class="item-name">${upgrade.icon} ${upgrade.name}</div>
+                            <div class="item-cost">${formatNumber(upgrade.cost)} ₾</div>
+                        </div>
+                        <div class="item-desc">${upgrade.description}</div>
+                    `;
+                    
+                    if (canAfford) {
+                        fullItemElement.addEventListener('click', () => buyUpgrade(upgrade.id));
+                    }
+                    
+                    elements.upgradeItemsFull.appendChild(fullItemElement);
+                }
+            });
+            
+            // Display purchased upgrades
+            if (elements.purchasedUpgrades) {
+                upgradeTypes.forEach(upgrade => {
+                    const upgradeState = game.upgrades[upgrade.id];
+                    
+                    // Skip if not purchased
+                    if (!upgradeState.purchased) return;
+                    
+                    const itemElement = document.createElement('div');
+                    itemElement.className = `upgrade-item`;
+                    itemElement.innerHTML = `
+                        <div class="item-header">
+                            <div class="item-name">${upgrade.icon} ${upgrade.name}</div>
+                        </div>
+                        <div class="item-desc">${upgrade.description}</div>
+                    `;
+                    
+                    elements.purchasedUpgrades.appendChild(itemElement);
+                });
+            }
+        }
+        
+        // Update special items display
+        function updateSpecialItems() {
+            if (!elements.specialItems) return;
+            elements.specialItems.innerHTML = '';
+            
+            specialItemTypes.forEach(item => {
+                const itemState = game.specialItems[item.id];
+                
+                // Skip if not unlocked
+                if (!itemState.unlocked) return;
+                
+                const canBuy = itemState.count < item.maxOwned && game.money >= item.cost;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = `shop-item ${canBuy ? '' : 'disabled'}`;
+                itemElement.innerHTML = `
+                    <div class="item-header">
+                        <div class="item-name">${item.icon} ${item.name}</div>
+                        <div class="item-cost">${formatNumber(item.cost)} ₾</div>
+                    </div>
+                    <div class="item-desc">${item.description}</div>
+                    <div class="shop-item-stats">
+                        <div class="shop-item-owned">ნაყიდი: ${itemState.count}/${item.maxOwned}</div>
+                    </div>
+                `;
+                
+                if (canBuy) {
+                    itemElement.addEventListener('click', () => buySpecialItem(item.id));
+                }
+                
+                elements.specialItems.appendChild(itemElement);
             });
         }
         
         // Update achievements display
         function updateAchievements() {
+            if (!elements.achievementItems) return;
             elements.achievementItems.innerHTML = '';
             
             achievementTypes.forEach(achievement => {
                 const achievementState = game.achievements[achievement.id];
                 
                 const itemElement = document.createElement('div');
-                itemElement.className = `achievement-item ${achievementState.earned ? '' : 'locked'} ${achievementState.earned && !achievementState.displayed ? 'new' : ''}`;
-                itemElement.innerHTML = `
-                    <div class="achievement-name">${achievement.name}</div>
-                    <div class="achievement-desc">${achievement.description}</div>
-                `;
+                itemElement.className = `achievement-item ${achievementState.earned ? '' : 'locked'}`;
                 
-                if (achievementState.earned && !achievementState.displayed) {
-                    achievementState.displayed = true;
+                let progressText = '';
+                let progressBarWidth = '0%';
+                
+                if (!achievementState.earned) {
+                    if (achievement.requirement.totalPastries) {
+                        const progress = Math.min(1, game.totalPastries / achievement.requirement.totalPastries) * 100;
+                        progressBarWidth = `${progress}%`;
+                        progressText = `${formatNumber(game.totalPastries)}/${formatNumber(achievement.requirement.totalPastries)}`;
+                    } else if (achievement.requirement.totalClicks) {
+                        const progress = Math.min(1, game.totalClicks / achievement.requirement.totalClicks) * 100;
+                        progressBarWidth = `${progress}%`;
+                        progressText = `${formatNumber(game.totalClicks)}/${formatNumber(achievement.requirement.totalClicks)}`;
+                    } else if (achievement.requirement.prestigeLevel) {
+                        const progress = Math.min(1, game.prestigeLevel / achievement.requirement.prestigeLevel) * 100;
+                        progressBarWidth = `${progress}%`;
+                        progressText = `${game.prestigeLevel}/${achievement.requirement.prestigeLevel}`;
+                    }
                 }
+                
+                itemElement.innerHTML = `
+                    <div class="item-header">
+                        <div class="item-name">${achievement.icon} ${achievement.name}</div>
+                    </div>
+                    <div class="item-desc">${achievement.description}</div>
+                    ${progressText ? `<div class="shop-item-stats">${progressText}</div>` : ''}
+                    <div class="achievement-progress">
+                        <div class="achievement-progress-bar" style="width: ${progressBarWidth}"></div>
+                    </div>
+                `;
                 
                 elements.achievementItems.appendChild(itemElement);
             });
         }
         
-        // Buy producer
-        function buyProducer(producerId) {
+        // Update prestige options
+        function updatePrestigeOptions() {
+            if (!elements.prestigeOptions) return;
+            elements.prestigeOptions.innerHTML = '';
+            
+            const newPrestigePoints = calculatePrestigePoints();
+            const canPrestige = newPrestigePoints > 0;
+            
+            prestigeOptions.forEach(option => {
+                const meetsRequirement = game.totalPastries >= option.minPastries;
+                const pointsWithMultiplier = Math.floor(newPrestigePoints * option.pointMultiplier);
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = `prestige-option ${!meetsRequirement || !canPrestige ? 'disabled' : ''}`;
+                
+                if (meetsRequirement && canPrestige && getRecommendedPrestigeOption() === option.id) {
+                    itemElement.classList.add('recommended');
+                }
+                
+                itemElement.innerHTML = `
+                    <div class="item-header">
+                        <div class="item-name">${option.name}</div>
+                    </div>
+                    <div class="item-desc">${option.description}</div>
+                    <div class="prestige-reward">+ ${pointsWithMultiplier} პრესტიჟის ქულა</div>
+                    <div class="shop-item-stats">მინიმუმ: ${formatNumber(option.minPastries)} ცომეული</div>
+                `;
+                
+                if (meetsRequirement && canPrestige) {
+                    itemElement.addEventListener('click', () => {
+                        prestige(option.id);
+                    });
+                }
+                
+                elements.prestigeOptions.appendChild(itemElement);
+            });
+        }
+        
+        // Update statistics view
+        function updateStatistics() {
+            if (!elements.statisticsList) return;
+            elements.statisticsList.innerHTML = '';
+            
+            // Update play time
+            const currentTimePlayed = game.totalTimePlayed + (Date.now() - game.startTime) / 1000;
+            elements.totalTimePlayed.textContent = formatTime(currentTimePlayed);
+            
+            statisticsTypes.forEach(stat => {
+                const value = stat.getValue ? stat.getValue() : (game[stat.id] || 0);
+                let formattedValue;
+                
+                switch (stat.format) {
+                    case 'number':
+                        formattedValue = formatNumber(value);
+                        break;
+                    case 'money':
+                        formattedValue = formatNumber(value) + ' ₾';
+                        break;
+                    case 'time':
+                        formattedValue = typeof value === 'string' ? value : formatTime(value);
+                        break;
+                    case 'ratio':
+                        formattedValue = value;
+                        break;
+                    default:
+                        formattedValue = value;
+                }
+                
+                const statElement = document.createElement('div');
+                statElement.className = 'statistic-item';
+                statElement.innerHTML = `
+                    <div class="statistic-label">${stat.name}</div>
+                    <div class="statistic-value">${formattedValue}</div>
+                `;
+                
+                elements.statisticsList.appendChild(statElement);
+            });
+        }
+        
+        // Calculate producer cost
+        function calculateProducerCost(producerId, quantity = 1) {
             const producer = producerTypes.find(p => p.id === producerId);
             const producerState = game.producers[producerId];
-            const cost = producer.baseCost * Math.pow(1.15, producerState.count);
+            let cost = 0;
+            
+            if (quantity === 'max') {
+                // Calculate how many can be afforded
+                let canAfford = 0;
+                let totalCost = 0;
+                let currentCost = producer.baseCost * Math.pow(1.15, producerState.count);
+                
+                while (totalCost + currentCost <= game.money) {
+                    canAfford++;
+                    totalCost += currentCost;
+                    currentCost = producer.baseCost * Math.pow(1.15, producerState.count + canAfford);
+                }
+                
+                return totalCost;
+            } else {
+                // Calculate cost for specific quantity
+                for (let i = 0; i < quantity; i++) {
+                    cost += producer.baseCost * Math.pow(1.15, producerState.count + i);
+                }
+                return cost;
+            }
+        }
+        
+        // Buy producer
+        function buyProducer(producerId, quantity = 1) {
+            const producer = producerTypes.find(p => p.id === producerId);
+            const producerState = game.producers[producerId];
+            const cost = calculateProducerCost(producerId, quantity);
             
             if (game.money >= cost) {
+                if (game.settings.soundEnabled) {
+                    sounds.buy.currentTime = 0;
+                    sounds.buy.play();
+                }
+                
                 game.money -= cost;
-                producerState.count++;
+                
+                if (quantity === 'max') {
+                    // Calculate how many can be afforded
+                    let canAfford = 0;
+                    let remainingMoney = game.money + cost; // Reset money for calculation
+                    let currentCost = producer.baseCost * Math.pow(1.15, producerState.count);
+                    
+                    while (remainingMoney >= currentCost) {
+                        canAfford++;
+                        remainingMoney -= currentCost;
+                        currentCost = producer.baseCost * Math.pow(1.15, producerState.count + canAfford);
+                    }
+                    
+                    producerState.count += canAfford;
+                    showNotification(`შეძენილია ${canAfford} ${producer.name}`);
+                } else {
+                    producerState.count += quantity;
+                    showNotification(`შეძენილია ${quantity} ${producer.name}`);
+                }
+                
                 calculateMoneyPerSecond();
-                showNotification(`Purchased ${producer.name}`);
                 updateDisplay();
                 checkAchievements();
+                checkUpgradesUnlocked();
             }
         }
         
@@ -583,20 +2733,95 @@
             const upgradeState = game.upgrades[upgradeId];
             
             if (game.money >= upgrade.cost && !upgradeState.purchased) {
+                if (game.settings.soundEnabled) {
+                    sounds.upgrade.currentTime = 0;
+                    sounds.upgrade.play();
+                }
+                
                 game.money -= upgrade.cost;
                 upgradeState.purchased = true;
                 
                 // Apply upgrade effects
                 applyUpgradeEffects(upgrade);
                 
-                showNotification(`Purchased upgrade: ${upgrade.name}`);
+                showNotification(`შეძენილია გაუმჯობესება: ${upgrade.name}`);
+                updateDisplay();
+                checkAchievements();
+                checkUpgradesUnlocked();
+            }
+        }
+        
+        // Buy special item
+        function buySpecialItem(itemId) {
+            const item = specialItemTypes.find(i => i.id === itemId);
+            const itemState = game.specialItems[itemId];
+            
+            if (game.money >= item.cost && itemState.count < item.maxOwned) {
+                if (game.settings.soundEnabled) {
+                    sounds.upgrade.currentTime = 0;
+                    sounds.upgrade.play();
+                }
+                
+                game.money -= item.cost;
+                itemState.count++;
+                
+                // Apply item effects
+                applySpecialItemEffects();
+                
+                showNotification(`შეძენილია: ${item.name}`);
                 updateDisplay();
                 checkAchievements();
             }
         }
         
+        // Apply special item effects
+        function applySpecialItemEffects() {
+            // Reset producer multipliers
+            for (const producerId in game.producers) {
+                game.producers[producerId].multiplier = 1;
+            }
+            
+            // Re-apply upgrades
+            for (const upgradeId in game.upgrades) {
+                if (game.upgrades[upgradeId].purchased) {
+                    const upgrade = upgradeTypes.find(u => u.id === upgradeId);
+                    applyUpgradeEffects(upgrade, false);
+                }
+            }
+            
+            // Apply special items effects
+            specialItemTypes.forEach(item => {
+                const itemState = game.specialItems[item.id];
+                
+                for (let i = 0; i < itemState.count; i++) {
+                    if (item.effect.clickBoost) {
+                        game.clickMultiplier += item.effect.clickBoost;
+                    }
+                    
+                    if (item.effect.producerBoost) {
+                        if (item.effect.specificProducer) {
+                            game.producers[item.effect.specificProducer].multiplier += item.effect.producerBoost;
+                        } else {
+                            for (const producerId in game.producers) {
+                                game.producers[producerId].multiplier += item.effect.producerBoost;
+                            }
+                        }
+                    }
+                    
+                    if (item.effect.allBoost) {
+                        game.clickMultiplier += item.effect.allBoost;
+                        for (const producerId in game.producers) {
+                            game.producers[producerId].multiplier += item.effect.allBoost;
+                        }
+                    }
+                }
+            });
+            
+            calculateMoneyPerSecond();
+        }
+        
         // Apply upgrade effects
-        function applyUpgradeEffects(upgrade) {
+        function applyUpgradeEffects(upgrade, playSound = true) {
             if (upgrade.effect.clickMultiplier) {
                 game.clickMultiplier *= upgrade.effect.clickMultiplier;
             }
@@ -613,6 +2838,21 @@
                 }
             }
             
+            if (upgrade.effect.autoClickerSpeed) {
+                game.autoClicker.speed *= upgrade.effect.autoClickerSpeed;
+            }
+            
+            if (upgrade.effect.special === "autoClicker") {
+                game.autoClicker.enabled = true;
+                elements.autoClickBtn.style.display = 'inline-block';
+                elements.autoClickIcon.style.display = 'inline-block';
+            }
+            
+            if (upgrade.effect.special === "specialAbility") {
+                game.specialAbility.unlocked = true;
+                elements.specialAbilityBtn.style.display = 'inline-block';
+            }
+            
             calculateMoneyPerSecond();
         }
         
@@ -625,7 +2865,25 @@
                 perSecond += producer.baseOutput * producerState.count * producerState.multiplier;
             });
             
+            // Apply event multiplier if active
+            if (game.events.active) {
+                perSecond *= game.events.multiplier;
+            }
+            
+            // Apply special ability multiplier if active
+            if (game.specialAbility.active) {
+                perSecond *= game.specialAbility.multiplier;
+            }
+            
+            // Apply prestige multiplier
+            perSecond *= game.prestigeMultiplier;
+            
             game.moneyPerSecond = perSecond;
+            
+            // Track max pastries per second
+            if (!game.maxPastriesPerSecond || perSecond > game.maxPastriesPerSecond) {
+                game.maxPastriesPerSecond = perSecond;
+            }
         }
         
         // Check if upgrades should be unlocked
@@ -640,9 +2898,21 @@
                         requirementMet = false;
                     }
                     
+                    if (upgrade.requirement.totalClicks && game.totalClicks < upgrade.requirement.totalClicks) {
+                        requirementMet = false;
+                    }
+                    
                     if (upgrade.requirement.producers) {
                         for (const [producerId, count] of Object.entries(upgrade.requirement.producers)) {
                             if (game.producers[producerId].count < count) {
+                                requirementMet = false;
+                            }
+                        }
+                    }
+                    
+                    if (upgrade.requirement.upgrades) {
+                        for (const requiredUpgrade of upgrade.requirement.upgrades) {
+                            if (!game.upgrades[requiredUpgrade].purchased) {
                                 requirementMet = false;
                             }
                         }
@@ -652,6 +2922,16 @@
                         upgradeState.unlocked = true;
                         updateUpgrades();
                     }
+                }
+            });
+            
+            // Also check if special items should be unlocked
+            specialItemTypes.forEach(item => {
+                const itemState = game.specialItems[item.id];
+                
+                if (!itemState.unlocked && game.totalPastries >= item.cost * 0.5) {
+                    itemState.unlocked = true;
+                    updateSpecialItems();
                 }
             });
         }
@@ -668,6 +2948,7 @@
                     
                     if (achievement.requirement.totalPastries && game.totalPastries < achievement.requirement.totalPastries) {
                         requirementMet = false;
+                        achievementState.progress = Math.min(100, (game.totalPastries / achievement.requirement.totalPastries) * 100);
                     }
                     
                     if (achievement.requirement.producerCount) {
@@ -685,6 +2966,7 @@
                         }
                         if (totalProducers < achievement.requirement.totalProducers) {
                             requirementMet = false;
+                            achievementState.progress = Math.min(100, (totalProducers / achievement.requirement.totalProducers) * 100);
                         }
                     }
                     
@@ -697,6 +2979,7 @@
                         }
                         if (totalUpgrades < achievement.requirement.totalUpgrades) {
                             requirementMet = false;
+                            achievementState.progress = Math.min(100, (totalUpgrades / achievement.requirement.totalUpgrades) * 100);
                         }
                     }
                     
@@ -711,12 +2994,56 @@
                     
                     if (achievement.requirement.moneyPerSecond && game.moneyPerSecond < achievement.requirement.moneyPerSecond) {
                         requirementMet = false;
+                        achievementState.progress = Math.min(100, (game.moneyPerSecond / achievement.requirement.moneyPerSecond) * 100);
+                    }
+                    
+                    if (achievement.requirement.totalClicks && game.totalClicks < achievement.requirement.totalClicks) {
+                        requirementMet = false;
+                        achievementState.progress = Math.min(100, (game.totalClicks / achievement.requirement.totalClicks) * 100);
+                    }
+                    
+                    if (achievement.requirement.prestigeLevel && game.prestigeLevel < achievement.requirement.prestigeLevel) {
+                        requirementMet = false;
+                        achievementState.progress = Math.min(100, (game.prestigeLevel / achievement.requirement.prestigeLevel) * 100);
+                    }
+                    
+                    if (achievement.requirement.totalSpecialItems) {
+                        let totalItems = 0;
+                        for (const itemId in game.specialItems) {
+                            totalItems += game.specialItems[itemId].count;
+                        }
+                        if (totalItems < achievement.requirement.totalSpecialItems) {
+                            requirementMet = false;
+                            achievementState.progress = Math.min(100, (totalItems / achievement.requirement.totalSpecialItems) * 100);
+                        }
+                    }
+                    
+                    if (achievement.requirement.allSpecialItems) {
+                        let allOwned = true;
+                        for (const item of specialItemTypes) {
+                            if (game.specialItems[item.id].count === 0) {
+                                allOwned = false;
+                                requirementMet = false;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (achievement.requirement.pastryLevel && game.currentPastryLevel < achievement.requirement.pastryLevel) {
+                        requirementMet = false;
+                        achievementState.progress = Math.min(100, (game.currentPastryLevel / achievement.requirement.pastryLevel) * 100);
                     }
                     
                     if (requirementMet) {
                         achievementState.earned = true;
                         newAchievements = true;
-                        showNotification(`Achievement unlocked: ${achievement.name}!`);
+                        
+                        if (game.settings.soundEnabled) {
+                            sounds.achievement.currentTime = 0;
+                            sounds.achievement.play();
+                        }
+                        
+                        showNotification(`მიღწევა გახსნილია: ${achievement.name}!`);
                     }
                 }
             });
@@ -736,9 +3063,121 @@
                 if (game.totalPastries >= requiredPastries) {
                     game.currentPastryLevel = nextPastryLevel;
                     elements.clicker.style.backgroundImage = `url('${nextPastry.image}')`;
-                    showNotification(`Unlocked new pastry: ${nextPastry.name}!`);
+                    showNotification(`გახსნილია ახალი ცომეული: ${nextPastry.name}!`);
                     updateDisplay();
+                    checkAchievements(); // Check for pastry variety achievement
                 }
+            }
+        }
+        
+        // Calculate prestige points
+        function calculatePrestigePoints() {
+            if (game.totalPastries < 1000000) return 0;
+            return Math.floor(Math.sqrt(game.totalPastries / 1000000));
+        }
+        
+        // Get recommended prestige option
+        function getRecommendedPrestigeOption() {
+            const points = calculatePrestigePoints();
+            
+            // If it's first prestige, recommend basic
+            if (game.prestigeLevel === 0) return 'basic';
+            
+            // If many points, recommend baker's dynasty
+            if (points >= 10) return 'producers';
+            
+            // Otherwise, recommend clicking if you have few producers
+            let totalProducers = 0;
+            for (const id in game.producers) {
+                totalProducers += game.producers[id].count;
+            }
+            
+            if (totalProducers < 50) return 'clicking';
+            
+            // Default to basic
+            return 'basic';
+        }
+        
+        // Perform prestige
+        function prestige(optionId) {
+            const option = prestigeOptions.find(o => o.id === optionId);
+            const newPoints = calculatePrestigePoints();
+            
+            if (newPoints <= 0 || game.totalPastries < option.minPastries) {
+                showNotification("თქვენ არ გაქვთ საკმარისი ცომეული პრესტიჟისთვის!");
+                return;
+            }
+            
+            if (confirm("ნამდვილად გსურთ პრესტიჟი? თქვენი პროგრესი განულდება, მაგრამ მიიღებთ მუდმივ ბონუსებს!")) {
+                // Record prestige time
+                const prestigeTime = (Date.now() - game.startTime) / 1000 + game.totalTimePlayed;
+                if (!game.fastestPrestige || prestigeTime < game.fastestPrestige) {
+                    game.fastestPrestige = prestigeTime;
+                }
+                
+                // Apply prestige
+                game.prestigeLevel++;
+                game.prestigePoints += Math.floor(newPoints * option.pointMultiplier);
+                
+                // Calculate new multiplier
+                game.prestigeMultiplier = 1 + (game.prestigePoints * 0.1);
+                
+                // Store current total time played
+                game.totalTimePlayed += (Date.now() - game.startTime) / 1000;
+                
+                // Apply special effects if any
+                let specialEffect = option.specialEffect;
+                
+                // Reset game state
+                const previousPrestigeState = {
+                    prestigeLevel: game.prestigeLevel,
+                    prestigePoints: game.prestigePoints,
+                    prestigeMultiplier: game.prestigeMultiplier,
+                    totalTimePlayed: game.totalTimePlayed,
+                    fastestPrestige: game.fastestPrestige,
+                    achievements: game.achievements,
+                    settings: game.settings
+                };
+                
+                // Reset the game state
+                resetGameState(false);
+                
+                // Restore prestige state
+                game.prestigeLevel = previousPrestigeState.prestigeLevel;
+                game.prestigePoints = previousPrestigeState.prestigePoints;
+                game.prestigeMultiplier = previousPrestigeState.prestigeMultiplier;
+                game.totalTimePlayed = previousPrestigeState.totalTimePlayed;
+                game.fastestPrestige = previousPrestigeState.fastestPrestige;
+                game.achievements = previousPrestigeState.achievements;
+                game.settings = previousPrestigeState.settings;
+                
+                // Apply prestigeMultiplier to clickMultiplier
+                game.clickMultiplier *= game.prestigeMultiplier;
+                
+                // Apply special effects
+                if (specialEffect) {
+                    if (specialEffect.startingProducers) {
+                        for (const [producerId, count] of Object.entries(specialEffect.startingProducers)) {
+                            game.producers[producerId].count = count;
+                            game.producers[producerId].unlocked = true;
+                        }
+                    }
+                    
+                    if (specialEffect.startingClickMultiplier) {
+                        game.clickMultiplier *= specialEffect.startingClickMultiplier;
+                    }
+                }
+                
+                // Set new start time
+                game.startTime = Date.now();
+                
+                // Update display and check achievements
+                calculateMoneyPerSecond();
+                updateDisplay();
+                checkAchievements();
+                checkUpgradesUnlocked();
+                
+                showNotification(`პრესტიჟი შესრულებულია! თქვენ გაქვთ ${game.prestigeMultiplier.toFixed(2)}x გამრავლება!`);
             }
         }
         
@@ -752,21 +3191,460 @@
             }, game.settings.notificationDuration);
         }
         
-        // Game initialization
-        function initGame() {
+        // Reset game state
+        function resetGameState(fullReset = true) {
+            // Save settings if not full reset
+            const savedSettings = fullReset ? {} : {...game.settings};
+            const savedAchievements = fullReset ? {} : {...game.achievements};
+            
+            // Reset game object
+            Object.assign(game, {
+                money: 0,
+                moneyPerClick: 1,
+                moneyPerSecond: 0,
+                totalPastries: 0,
+                totalClicks: 0,
+                totalMoneyEarned: 0,
+                clickMultiplier: 1,
+                autoClickerInterval: 1000,
+                currentPastryLevel: 0,
+                lastSave: Date.now(),
+                startTime: Date.now(),
+                totalTimePlayed: 0,
+                prestigeLevel: 0,
+                prestigePoints: 0,
+                prestigeMultiplier: 1,
+                achievements: {},
+                producers: {},
+                upgrades: {},
+                specialItems: {},
+                autoClicker: {
+                    enabled: false,
+                    speed: 1,
+                    last: Date.now()
+                },
+                specialAbility: {
+                    unlocked: false,
+                    cooldown: 60,
+                    duration: 10,
+                    multiplier: 10,
+                    lastUsed: 0,
+                    active: false
+                },
+                events: {
+                    active: false,
+                    type: null,
+                    multiplier: 1,
+                    endTime: 0
+                },
+                settings: {
+                    soundEnabled: true,
+                    notificationDuration: 3000,
+                    showClickIndicators: true,
+                    numberFormat: 'compact',
+                    buyMode: 1,
+                }
+            });
+            
+            // Initialize producers
+            producerTypes.forEach(producer => {
+                game.producers[producer.id] = { count: 0, unlocked: false, multiplier: 1 };
+            });
+            
+            // Initialize upgrades
+            upgradeTypes.forEach(upgrade => {
+                game.upgrades[upgrade.id] = { purchased: false, unlocked: false };
+            });
+            
+            // Initialize special items
+            specialItemTypes.forEach(item => {
+                game.specialItems[item.id] = { count: 0, unlocked: false };
+            });
+            
+            // Initialize achievements
+            achievementTypes.forEach(achievement => {
+                game.achievements[achievement.id] = { earned: false, displayed: false, progress: 0 };
+            });
+            
+            // Restore settings if not full reset
+            if (!fullReset) {
+                game.settings = savedSettings;
+                game.achievements = savedAchievements;
+            }
+            
             // Unlock first producer
             game.producers.apprentice.unlocked = true;
             
-            // Set click handler for pastry
+            // Reset clicker image
+            elements.clicker.style.backgroundImage = `url('${pastryTypes[0].image}')`;
+            
+            // Hide special buttons
+            elements.autoClickBtn.style.display = 'none';
+            elements.autoClickIcon.style.display = 'none';
+            elements.specialAbilityBtn.style.display = 'none';
+            
+            // Update display
+            updateDisplay();
+        }
+        
+        // Handle pastry click
+        function handlePastryClick(e) {
+            game.totalClicks++;
+            
+            if (game.settings.soundEnabled) {
+                sounds.click.currentTime = 0;
+                sounds.click.play();
+            }
+            
+            const currentPastry = pastryTypes[game.currentPastryLevel];
+            let clickValue = currentPastry.value * game.clickMultiplier;
+            
+            // Apply special ability multiplier if active
+            if (game.specialAbility.active) {
+                clickValue *= game.specialAbility.multiplier;
+            }
+            
+            // Apply event multiplier if active
+            if (game.events.active) {
+                clickValue *= game.events.multiplier;
+            }
+            
+            // Track max click value
+            if (!game.maxClickValue || clickValue > game.maxClickValue) {
+                game.maxClickValue = clickValue;
+            }
+            
+            // Create click indicator if enabled
+            if (game.settings.showClickIndicators) {
+                const indicator = document.createElement('div');
+                indicator.className = 'click-indicator';
+                indicator.textContent = '+' + formatNumber(clickValue);
+                
+                // Position relative to cursor
+                const rect = elements.clicker.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                indicator.style.left = x + 'px';
+                indicator.style.top = y + 'px';
+                
+                elements.clicker.appendChild(indicator);
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    indicator.remove();
+                }, 1000);
+            }
+            
+            addMoney(clickValue);
+        }
+        
+        // Auto clicker function
+        function handleAutoClick() {
+            if (!game.autoClicker.enabled) return;
+            
+            const now = Date.now();
+            const timeDiff = now - game.autoClicker.last;
+            const clickInterval = 1000 / game.autoClicker.speed;
+            
+            if (timeDiff >= clickInterval) {
+                game.autoClicker.last = now;
+                
+                // Simulate a click at center of clicker
+                const currentPastry = pastryTypes[game.currentPastryLevel];
+                let clickValue = currentPastry.value * game.clickMultiplier;
+                
+                // Apply special ability multiplier if active
+                if (game.specialAbility.active) {
+                    clickValue *= game.specialAbility.multiplier;
+                }
+                
+                // Apply event multiplier if active
+                if (game.events.active) {
+                    clickValue *= game.events.multiplier;
+                }
+                
+                addMoney(clickValue);
+                game.totalClicks++;
+            }
+        }
+        
+        // Toggle auto clicker
+        function toggleAutoClicker() {
+            game.autoClicker.enabled = !game.autoClicker.enabled;
+            elements.autoClickBtn.textContent = `ავტო-კლიკი: ${game.autoClicker.enabled ? 'ჩართული' : 'გამორთული'}`;
+            elements.autoClickIcon.classList.toggle('spin', game.autoClicker.enabled);
+        }
+        
+        // Activate special ability
+        function activateSpecialAbility() {
+            if (!game.specialAbility.unlocked) return;
+            
+            const now = Date.now();
+            const timeSinceLastUse = (now - game.specialAbility.lastUsed) / 1000;
+            
+            if (timeSinceLastUse < game.specialAbility.cooldown && game.specialAbility.lastUsed > 0) {
+                showNotification(`სპეციალური უნარი ჯერ კიდევ გაგრილებაშია!`);
+                return;
+            }
+            
+            if (game.settings.soundEnabled) {
+                sounds.special.currentTime = 0;
+                sounds.special.play();
+            }
+            
+            game.specialAbility.active = true;
+            game.specialAbility.lastUsed = now;
+            
+            // Recalculate money per second with multiplier
+            calculateMoneyPerSecond();
+            
+            showNotification(`სპეციალური უნარი აქტიურია! ${game.specialAbility.multiplier}x წარმოება ${game.specialAbility.duration} წამის განმავლობაში!`);
+            
+            // Update display to show active ability
+            updateDisplay();
+            
+            // Set timeout to end ability
+            setTimeout(() => {
+                game.specialAbility.active = false;
+                calculateMoneyPerSecond();
+                updateDisplay();
+                showNotification(`სპეციალური უნარი დასრულდა!`);
+            }, game.specialAbility.duration * 1000);
+        }
+        
+        // Start random events
+        function startRandomEvent() {
+            // Don't start events if one is already active
+            if (game.events.active) return;
+            
+            // Random chance to start an event
+            if (Math.random() < 0.1) {
+                const randomEvent = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+                
+                game.events.active = true;
+                game.events.type = randomEvent.id;
+                game.events.multiplier = randomEvent.effect.allMultiplier || 
+                                        randomEvent.effect.producerMultiplier || 
+                                        randomEvent.effect.clickMultiplier || 1;
+                game.events.endTime = Date.now() + (randomEvent.duration * 1000);
+                
+                // Update event banner
+                elements.eventBanner.querySelector('.event-title').textContent = randomEvent.name;
+                elements.eventBanner.querySelector('.event-desc').textContent = randomEvent.description;
+                elements.eventBanner.classList.add('active');
+                
+                // Apply event effects
+                calculateMoneyPerSecond();
+                
+                // Update display
+                updateEventTimer();
+                updateDisplay();
+                
+                showNotification(`ღონისძიება დაიწყო: ${randomEvent.name}!`);
+            }
+        }
+        
+        // Update event timer
+        function updateEventTimer() {
+            if (!game.events.active) return;
+            
+            const timeRemaining = Math.max(0, (game.events.endTime - Date.now()) / 1000);
+            
+            if (timeRemaining <= 0) {
+                // End event
+                game.events.active = false;
+                elements.eventBanner.classList.remove('active');
+                calculateMoneyPerSecond();
+                updateDisplay();
+                showNotification("ღონისძიება დასრულდა!");
+                return;
+            }
+            
+            // Update timer display
+            elements.eventTimer.textContent = formatTime(timeRemaining) + " დარჩა";
+            
+            // Schedule next update
+            setTimeout(updateEventTimer, 1000);
+        }
+        
+        // Game initialization
+        function initGame() {
+            // Set main click handler for pastry
+            elements.clicker.style.backgroundImage = `url('${pastryTypes[0].image}')`;
             elements.clicker.addEventListener('click', handlePastryClick);
             
-            // Set up game loop
-            setInterval(gameLoop, game.autoClickerInterval);
+            // Set handlers for buy mode buttons
+            elements.buy1Btn.addEventListener('click', () => {
+                game.settings.buyMode = 1;
+                document.querySelectorAll('#buy-1, #buy-10, #buy-100, #buy-max').forEach(btn => btn.classList.remove('active'));
+                elements.buy1Btn.classList.add('active');
+                updateShop();
+            });
             
-            // Set up save/load/reset
+            elements.buy10Btn.addEventListener('click', () => {
+                game.settings.buyMode = 10;
+                document.querySelectorAll('#buy-1, #buy-10, #buy-100, #buy-max').forEach(btn => btn.classList.remove('active'));
+                elements.buy10Btn.classList.add('active');
+                updateShop();
+            });
+            
+            elements.buy100Btn.addEventListener('click', () => {
+                game.settings.buyMode = 100;
+                document.querySelectorAll('#buy-1, #buy-10, #buy-100, #buy-max').forEach(btn => btn.classList.remove('active'));
+                elements.buy100Btn.classList.add('active');
+                updateShop();
+            });
+            
+            elements.buyMaxBtn.addEventListener('click', () => {
+                game.settings.buyMode = 'max';
+                document.querySelectorAll('#buy-1, #buy-10, #buy-100, #buy-max').forEach(btn => btn.classList.remove('active'));
+                elements.buyMaxBtn.classList.add('active');
+                updateShop();
+            });
+            
+            // Set handlers for auto clicker and special ability
+            elements.autoClickBtn.addEventListener('click', toggleAutoClicker);
+            elements.specialAbilityBtn.addEventListener('click', activateSpecialAbility);
+            
+            // Set nav tab handlers
+            elements.navTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and views
+                    elements.navTabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.game-view').forEach(view => view.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Show corresponding view
+                    const viewId = tab.dataset.view + '-view';
+                    document.getElementById(viewId).classList.add('active');
+                    
+                    // Update display
+                    updateDisplay();
+                });
+            });
+            
+            // Set event close handler
+            elements.eventClose.addEventListener('click', () => {
+                elements.eventBanner.classList.remove('active');
+            });
+            
+            // Set main menu handlers
+            elements.newGameBtn.addEventListener('click', () => {
+                elements.mainMenu.style.display = 'none';
+                elements.gameInterface.style.display = 'block';
+                resetGameState(true);
+            });
+            
+            elements.continueBtn.addEventListener('click', () => {
+                elements.mainMenu.style.display = 'none';
+                elements.gameInterface.style.display = 'block';
+                loadGame();
+            });
+            
+            elements.importBtn.addEventListener('click', () => {
+                elements.importModal.classList.add('active');
+            });
+            
+            elements.creditsBtn.addEventListener('click', () => {
+                elements.creditsModal.classList.add('active');
+            });
+            
+            // Set game action handlers
             elements.saveBtn.addEventListener('click', saveGame);
-            elements.loadBtn.addEventListener('click', loadGame);
-            elements.resetBtn.addEventListener('click', resetGame);
+            elements.exportBtn.addEventListener('click', () => {
+                elements.exportCode.value = btoa(JSON.stringify(game));
+                elements.exportModal.classList.add('active');
+            });
+            elements.resetBtn.addEventListener('click', () => resetGame(true));
+            
+            // Modal handlers
+            elements.modalCloseBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.modal-overlay').forEach(modal => {
+                        modal.classList.remove('active');
+                    });
+                });
+            });
+            
+            elements.importConfirm.addEventListener('click', () => {
+                try {
+                    const importedGame = JSON.parse(atob(elements.importCode.value));
+                    Object.assign(game, importedGame);
+                    updateDisplay();
+                    elements.importModal.classList.remove('active');
+                    showNotification("თამაში წარმატებით ჩაიტვირთა!");
+                } catch (error) {
+                    showNotification("არასწორი შენახვის კოდი!");
+                }
+            });
+            
+            elements.copyExport.addEventListener('click', () => {
+                elements.exportCode.select();
+                document.execCommand('copy');
+                showNotification("კოდი დაკოპირებულია ბუფერში!");
+            });
+            
+            // Settings handlers
+            elements.soundToggle.addEventListener('change', e => {
+                game.settings.soundEnabled = e.target.checked;
+            });
+            
+            elements.notificationDuration.addEventListener('change', e => {
+                game.settings.notificationDuration = parseInt(e.target.value);
+            });
+            
+            elements.clickIndicatorToggle.addEventListener('change', e => {
+                game.settings.showClickIndicators = e.target.checked;
+            });
+            
+            elements.numberFormat.addEventListener('change', e => {
+                game.settings.numberFormat = e.target.value;
+                updateDisplay();
+            });
+            
+            elements.exportSaveBtn.addEventListener('click', () => {
+                elements.exportCode.value = btoa(JSON.stringify(game));
+                elements.exportModal.classList.add('active');
+            });
+            
+            elements.importSaveBtn.addEventListener('click', () => {
+                elements.importModal.classList.add('active');
+            });
+            
+            elements.hardResetBtn.addEventListener('click', () => {
+                if (confirm("ნამდვილად გსურთ თამაშის სრულად განულება? ყველა პროგრესი დაიკარგება!")) {
+                    resetGameState(true);
+                    showNotification("თამაში განულებულია!");
+                }
+            });
+            
+            elements.backToMenuBtn.addEventListener('click', () => {
+                saveGame();
+                elements.gameInterface.style.display = 'none';
+                elements.mainMenu.style.display = 'flex';
+                
+                // Show continue button if saved game exists
+                if (localStorage.getItem('sacxobiTycoon')) {
+                    elements.continueBtn.style.display = 'block';
+                }
+            });
+            
+            // Check if saved game exists
+            if (localStorage.getItem('sacxobiTycoon')) {
+                elements.continueBtn.style.display = 'block';
+                elements.mainMenu.style.display = 'flex';
+                elements.gameInterface.style.display = 'none';
+            } else {
+                elements.continueBtn.style.display = 'none';
+                elements.mainMenu.style.display = 'none';
+                elements.gameInterface.style.display = 'block';
+            }
+            
+            // Set up game loop
+            setInterval(gameLoop, 100);
             
             // Initial display update
             updateDisplay();
@@ -778,7 +3656,7 @@
         
         // Game loop
         function gameLoop() {
-            // Calculate time since last tick for offline progress
+            // Calculate time since last tick
             const now = Date.now();
             const timeDiff = (now - game.lastSave) / 1000;
             game.lastSave = now;
@@ -786,6 +3664,14 @@
             // Add money from producers
             if (game.moneyPerSecond > 0) {
                 addMoney(game.moneyPerSecond * timeDiff);
+            }
+            
+            // Handle auto clicker
+            handleAutoClick();
+            
+            // Update UI less frequently
+            if (Math.floor(now / 1000) % 2 === 0) {
+                updateDisplay();
             }
             
             // Unlock new producers based on money
@@ -796,64 +3682,91 @@
                     updateShop();
                 }
             });
-        }
-        
-        // Handle pastry click
-        function handlePastryClick(e) {
-            const currentPastry = pastryTypes[game.currentPastryLevel];
-            const moneyToAdd = currentPastry.value * game.clickMultiplier;
             
-            // Create click indicator
-            const indicator = document.createElement('div');
-            indicator.className = 'click-indicator';
-            indicator.textContent = '+' + formatNumber(moneyToAdd);
-            indicator.style.left = (e.clientX - e.target.getBoundingClientRect().left) + 'px';
-            indicator.style.top = (e.clientY - e.target.getBoundingClientRect().top) + 'px';
-            elements.clicker.appendChild(indicator);
-            
-            // Remove indicator after animation
-            setTimeout(() => {
-                indicator.remove();
-            }, 1000);
-            
-            addMoney(moneyToAdd);
+            // Random chance for events (check every 30 seconds)
+            if (Math.floor(now / 30000) !== Math.floor(game.lastSave / 30000)) {
+                startRandomEvent();
+            }
         }
         
         // Save game to local storage
         function saveGame() {
-            localStorage.setItem('georgianPastryClicker', JSON.stringify(game));
-            showNotification('Game saved successfully!');
+            // Update total play time
+            game.totalTimePlayed += (Date.now() - game.startTime) / 1000;
+            game.startTime = Date.now();
+            
+            localStorage.setItem('sacxobiTycoon', JSON.stringify(game));
+            showNotification('თამაში შენახულია!');
         }
         
         // Load game from local storage
         function loadGame() {
-            const savedGame = localStorage.getItem('georgianPastryClicker');
+            const savedGame = localStorage.getItem('sacxobiTycoon');
             if (savedGame) {
-                const parsedGame = JSON.parse(savedGame);
-                
-                // Merge saved game with default game to ensure all properties exist
-                Object.assign(game, parsedGame);
-                
-                // Update display
-                elements.clicker.style.backgroundImage = `url('${pastryTypes[game.currentPastryLevel].image}')`;
-                calculateMoneyPerSecond();
-                updateDisplay();
-                showNotification('Game loaded successfully!');
+                try {
+                    const parsedGame = JSON.parse(savedGame);
+                    
+                    // Merge saved game with current game to ensure all properties exist
+                    Object.assign(game, parsedGame);
+                    
+                    // Reset start time to current time
+                    game.startTime = Date.now();
+                    
+                    // Update display
+                    elements.clicker.style.backgroundImage = `url('${pastryTypes[game.currentPastryLevel].image}')`;
+                    
+                    // Show auto-clicker and special ability buttons if unlocked
+                    if (game.autoClicker.enabled) {
+                        elements.autoClickBtn.style.display = 'inline-block';
+                        elements.autoClickIcon.style.display = 'inline-block';
+                    }
+                    
+                    if (game.specialAbility.unlocked) {
+                        elements.specialAbilityBtn.style.display = 'inline-block';
+                    }
+                    
+                    // Update settings UI
+                    elements.soundToggle.checked = game.settings.soundEnabled;
+                    elements.notificationDuration.value = game.settings.notificationDuration;
+                    elements.clickIndicatorToggle.checked = game.settings.showClickIndicators;
+                    elements.numberFormat.value = game.settings.numberFormat;
+                    
+                    // Update buy mode UI
+                    document.querySelectorAll('#buy-1, #buy-10, #buy-100, #buy-max').forEach(btn => btn.classList.remove('active'));
+                    if (game.settings.buyMode === 1) elements.buy1Btn.classList.add('active');
+                    else if (game.settings.buyMode === 10) elements.buy10Btn.classList.add('active');
+                    else if (game.settings.buyMode === 100) elements.buy100Btn.classList.add('active');
+                    else elements.buyMaxBtn.classList.add('active');
+                    
+                    // Calculate money per second
+                    calculateMoneyPerSecond();
+                    
+                    // Update display
+                    updateDisplay();
+                    
+                    showNotification('თამაში ჩაიტვირთა!');
+                } catch (error) {
+                    console.error('Error loading game:', error);
+                    showNotification('შეცდომა თამაშის ჩატვირთვისას!');
+                }
             } else {
-                showNotification('No saved game found!');
+                showNotification('ვერ მოიძებნა შენახული თამაში!');
             }
         }
         
-        // Reset game
-        function resetGame() {
-            if (confirm('Are you sure you want to reset your game? All progress will be lost!')) {
-                localStorage.removeItem('georgianPastryClicker');
-                location.reload();
+        // Reset game with confirmation
+        function resetGame(needConfirmation = true) {
+            if (!needConfirmation || confirm('ნამდვილად გსურთ თამაშის განულება? მთელი პროგრესი დაიკარგება!')) {
+                resetGameState(true);
+                showNotification('თამაში განულებულია!');
             }
         }
         
-        // Start the game
+        // Auto-save game every minute
+        setInterval(saveGame, 60000);
+        
+        // Initialize the game
         initGame();
     </script>
 </body>
-</html>
+</html>                                    
