@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgian Pastry Clicker</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #f39c12;
+            --tertiary: #27ae60;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23f5f5f5" width="100" height="100"/><path fill="%23e74c3c22" d="M0 0h50v50H0z"/><path fill="%2327ae6022" d="M50 0h50v50H50z"/><path fill="%23f39c1222" d="M0 50h50v50H0z"/><path fill="%232c3e5022" d="M50 50h50v50H50z"/></svg>');
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 990px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+        }
+        
+        .stat-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            grid-column: span 3;
+        }
+        
+        @media (max-width: 768px) {
+            .stat-panel {
+                grid-column: span 1;
+            }
+        }
+        
+        .stat-panel h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat {
+            display: inline-block;
+            margin: 0 20px;
+            font-size: 1.1rem;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        .clicker-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            grid-column: span 1;
+        }
+        
+        .clicker-img {
+            width: 180px;
+            height: 180px;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: transform 0.1s;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+        }
+        
+        .clicker-img:active {
+            transform: scale(0.95);
+        }
+        
+        .click-indicator {
+            position: absolute;
+            color: var(--primary);
+            font-weight: bold;
+            animation: floatUp 1s forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+        }
+        
+        .upgrades-panel, .achievements-panel, .shop-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-height: 500px;
+            overflow-y: auto;
+            grid-column: span 1;
+        }
+        
+        .panel-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .shop-item, .upgrade-item, .achievement-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: var(--light);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .shop-item:hover, .upgrade-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .shop-item.disabled, .upgrade-item.disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .shop-item-name, .upgrade-name, .achievement-name {
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .shop-item-cost, .upgrade-cost {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .shop-item-owned, .upgrade-desc, .achievement-desc {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .achievement-item {
+            cursor: default;
+            background-color: var(--light);
+        }
+        
+        .achievement-item.locked {
+            opacity: 0.5;
+            background-color: #ddd;
+        }
+        
+        .achievement-item.new {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+            }
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: bottom 0.5s;
+            z-index: 100;
+        }
+        
+        .notification.show {
+            bottom: 20px;
+        }
+        
+        .save-load-panel {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+            grid-column: span 3;
+        }
+        
+        @media (max-width: 768px) {
+            .save-load-panel {
+                grid-column: span 1;
+            }
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #c0392b;
+        }
+        
+        button.secondary {
+            background-color: var(--secondary);
+        }
+        
+        button.secondary:hover {
+            background-color: #d35400;
+        }
+        
+        button:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Georgian Pastry Clicker</h1>
+    </header>
+    
+    <div class="container">
+        <div class="stat-panel">
+            <h2>Bakery Stats</h2>
+            <div class="stat">
+                <div>ლარი (GEL):</div>
+                <div class="stat-value" id="money">0</div>
+            </div>
+            <div class="stat">
+                <div>Pastries per second:</div>
+                <div class="stat-value" id="pastries-per-second">0</div>
+            </div>
+            <div class="stat">
+                <div>Total pastries:</div>
+                <div class="stat-value" id="total-pastries">0</div>
+            </div>
+        </div>
+        
+        <div class="clicker-panel">
+            <h3 class="panel-title">Bake Pastries</h3>
+            <div id="clicker" class="clicker-img"></div>
+            <div>
+                <div id="pastry-name">Khachapuri</div>
+                <div id="pastry-value">+1 per click</div>
+            </div>
+        </div>
+        
+        <div class="shop-panel">
+            <h3 class="panel-title">Bakery Staff</h3>
+            <div id="shop-items"></div>
+        </div>
+        
+        <div class="upgrades-panel">
+            <h3 class="panel-title">Upgrades</h3>
+            <div id="upgrade-items"></div>
+        </div>
+        
+        <div class="achievements-panel">
+            <h3 class="panel-title">Achievements</h3>
+            <div id="achievement-items"></div>
+        </div>
+        
+        <div class="save-load-panel">
+            <button id="save-btn">Save Game</button>
+            <button id="load-btn">Load Game</button>
+            <button id="reset-btn" class="secondary">Reset Game</button>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification"></div>
+    
+    <script>
+        // Game data
+        const game = {
+            money: 0,
+            moneyPerClick: 1,
+            moneyPerSecond: 0,
+            totalPastries: 0,
+            clickMultiplier: 1,
+            autoClickerInterval: 1000,
+            currentPastryLevel: 0,
+            lastSave: Date.now(),
+            achievements: {},
+            producers: {},
+            upgrades: {},
+            settings: {
+                notificationDuration: 3000,
+            }
+        };
+        
+        // Pastry types with progression
+        const pastryTypes = [
+            { name: "Khachapuri", value: 1, image: createPastryImageUrl("#F5DEB3", "#FFA07A") },
+            { name: "Lobiani", value: 5, image: createPastryImageUrl("#8B4513", "#D2691E") },
+            { name: "Churchkhela", value: 10, image: createPastryImageUrl("#8B0000", "#FF4500") },
+            { name: "Acharuli", value: 25, image: createPastryImageUrl("#F5DEB3", "#FFFF00") },
+            { name: "Pkhlovani", value: 50, image: createPastryImageUrl("#90EE90", "#556B2F") },
+            { name: "Nazuki", value: 100, image: createPastryImageUrl("#D2B48C", "#8B4513") },
+            { name: "Kada", value: 200, image: createPastryImageUrl("#DEB887", "#CD853F") },
+            { name: "Achma", value: 500, image: createPastryImageUrl("#FFDEAD", "#FFD700") }
+        ];
+        
+        // Create data URI for pastry images
+        function createPastryImageUrl(fillColor, accentColor) {
+            return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+                <ellipse cx="90" cy="90" rx="80" ry="60" fill="${fillColor}" stroke="${accentColor}" stroke-width="5" />
+                <path d="M50,90 Q90,40 130,90" fill="none" stroke="${accentColor}" stroke-width="3" />
+                <path d="M50,100 Q90,150 130,100" fill="none" stroke="${accentColor}" stroke-width="3" />
+            </svg>`;
+        }
+        
+        // Define producers
+        const producerTypes = [
+            { id: "apprentice", name: "Apprentice Baker", baseCost: 10, baseOutput: 0.1, description: "A novice baker learning the craft" },
+            { id: "baker", name: "Baker", baseCost: 100, baseOutput: 1, description: "Professional baker with years of experience" },
+            { id: "master", name: "Master Baker", baseCost: 1000, baseOutput: 8, description: "Master of Georgian pastry arts" },
+            { id: "oven", name: "Traditional Oven", baseCost: 10000, baseOutput: 47, description: "Authentic tone oven for baking" },
+            { id: "bakery", name: "Small Bakery", baseCost: 100000, baseOutput: 260, description: "Your own small bakery shop" },
+            { id: "factory", name: "Pastry Factory", baseCost: 1000000, baseOutput: 1400, description: "Industrial-scale production facility" },
+            { id: "franchise", name: "Bakery Franchise", baseCost: 10000000, baseOutput: 7800, description: "A chain of Georgian bakeries" },
+            { id: "corporation", name: "Pastry Corporation", baseCost: 100000000, baseOutput: 44000, description: "Multinational Georgian pastry corporation" }
+        ];
+        
+        // Initialize producers in game state
+        producerTypes.forEach(producer => {
+            game.producers[producer.id] = { count: 0, unlocked: false, multiplier: 1 };
+        });
+        
+        // Define upgrades
+        const upgradeTypes = [
+            { id: "better_flour", name: "Premium Flour", cost: 50, description: "Better flour for tastier pastries", requirement: { totalPastries: 10 }, effect: { clickMultiplier: 2 } },
+            { id: "cheese_upgrade", name: "Sulguni Cheese", cost: 200, description: "Authentic Georgian cheese", requirement: { totalPastries: 50 }, effect: { clickMultiplier: 2 } },
+            { id: "baking_tools", name: "Professional Tools", cost: 500, description: "Better tools for faster baking", requirement: { producers: { apprentice: 5 } }, effect: { producerMultiplier: { apprentice: 2 } } },
+            { id: "traditional_recipes", name: "Traditional Recipes", cost: 1000, description: "Authentic Georgian recipes", requirement: { totalPastries: 200 }, effect: { clickMultiplier: 2 } },
+            { id: "master_training", name: "Master Training", cost: 5000, description: "Send bakers to training", requirement: { producers: { baker: 10 } }, effect: { producerMultiplier: { baker: 2 } } },
+            { id: "stone_oven", name: "Stone Oven", cost: 10000, description: "Traditional stone ovens", requirement: { producers: { master: 5 } }, effect: { producerMultiplier: { master: 2 } } },
+            { id: "marketing", name: "Marketing Campaign", cost: 50000, description: "Advertise your pastries", requirement: { totalPastries: 5000 }, effect: { globalProducerMultiplier: 1.5 } },
+            { id: "automation", name: "Bakery Automation", cost: 200000, description: "Partially automate your bakery", requirement: { producers: { oven: 10 } }, effect: { producerMultiplier: { oven: 2 } } },
+            { id: "distribution", name: "Distribution Network", cost: 1000000, description: "Nationwide distribution", requirement: { producers: { bakery: 10 } }, effect: { producerMultiplier: { bakery: 2 } } },
+            { id: "international", name: "International Expansion", cost: 5000000, description: "Expand to international markets", requirement: { totalPastries: 1000000 }, effect: { globalProducerMultiplier: 2 } }
+        ];
+        
+        // Initialize upgrades in game state
+        upgradeTypes.forEach(upgrade => {
+            game.upgrades[upgrade.id] = { purchased: false, unlocked: false };
+        });
+        
+        // Define achievements
+        const achievementTypes = [
+            { id: "first_pastry", name: "First Bake", description: "Bake your first pastry", requirement: { totalPastries: 1 } },
+            { id: "ten_pastries", name: "Getting Started", description: "Bake 10 pastries", requirement: { totalPastries: 10 } },
+            { id: "hundred_pastries", name: "Hobby Baker", description: "Bake 100 pastries", requirement: { totalPastries: 100 } },
+            { id: "thousand_pastries", name: "Professional Baker", description: "Bake 1,000 pastries", requirement: { totalPastries: 1000 } },
+            { id: "million_pastries", name: "Pastry Tycoon", description: "Bake 1,000,000 pastries", requirement: { totalPastries: 1000000 } },
+            { id: "first_hire", name: "First Employee", description: "Hire your first baker", requirement: { producerCount: { apprentice: 1 } } },
+            { id: "baker_army", name: "Baker Army", description: "Have 50 total staff", requirement: { totalProducers: 50 } },
+            { id: "upgrade_master", name: "Upgrade Master", description: "Purchase 5 upgrades", requirement: { totalUpgrades: 5 } },
+            { id: "pastry_empire", name: "Pastry Empire", description: "Own every producer type", requirement: { allProducerTypes: true } },
+            { id: "speed_demon", name: "Speed Demon", description: "Reach 1,000 pastries per second", requirement: { moneyPerSecond: 1000 } }
+        ];
+        
+        // Initialize achievements in game state
+        achievementTypes.forEach(achievement => {
+            game.achievements[achievement.id] = { earned: false, displayed: false };
+        });
+        
+        // DOM elements
+        const elements = {
+            money: document.getElementById('money'),
+            pastriesPerSecond: document.getElementById('pastries-per-second'),
+            totalPastries: document.getElementById('total-pastries'),
+            clicker: document.getElementById('clicker'),
+            pastryName: document.getElementById('pastry-name'),
+            pastryValue: document.getElementById('pastry-value'),
+            shopItems: document.getElementById('shop-items'),
+            upgradeItems: document.getElementById('upgrade-items'),
+            achievementItems: document.getElementById('achievement-items'),
+            notification: document.getElementById('notification'),
+            saveBtn: document.getElementById('save-btn'),
+            loadBtn: document.getElementById('load-btn'),
+            resetBtn: document.getElementById('reset-btn')
+        };
+        
+        // Set initial pastry image
+        elements.clicker.style.backgroundImage = `url('${pastryTypes[0].image}')`;
+        
+        // Format large numbers
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(2) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(2) + 'K';
+            } else {
+                return num.toFixed(2);
+            }
+        }
+        
+        // Add money and update display
+        function addMoney(amount) {
+            game.money += amount;
+            game.totalPastries += amount;
+            updateDisplay();
+            checkUpgradesUnlocked();
+            checkAchievements();
+            checkPastryProgress();
+        }
+        
+        // Update the display with current game state
+        function updateDisplay() {
+            elements.money.textContent = formatNumber(game.money);
+            elements.pastriesPerSecond.textContent = formatNumber(game.moneyPerSecond);
+            elements.totalPastries.textContent = formatNumber(game.totalPastries);
+            
+            // Update current pastry info
+            const currentPastry = pastryTypes[game.currentPastryLevel];
+            elements.pastryName.textContent = currentPastry.name;
+            elements.pastryValue.textContent = `+${formatNumber(currentPastry.value * game.clickMultiplier)} per click`;
+            
+            updateShop();
+            updateUpgrades();
+            updateAchievements();
+        }
+        
+        // Update shop items display
+        function updateShop() {
+            elements.shopItems.innerHTML = '';
+            
+            producerTypes.forEach(producer => {
+                const producerState = game.producers[producer.id];
+                
+                // Skip if not unlocked yet
+                if (!producerState.unlocked) return;
+                
+                const cost = producer.baseCost * Math.pow(1.15, producerState.count);
+                const output = producer.baseOutput * producerState.multiplier;
+                const canAfford = game.money >= cost;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = `shop-item ${canAfford ? '' : 'disabled'}`;
+                itemElement.innerHTML = `
+                    <div class="shop-item-name">${producer.name}</div>
+                    <div class="shop-item-cost">${formatNumber(cost)} ლარი</div>
+                    <div class="shop-item-owned">Owned: ${producerState.count} (${formatNumber(output)} each)</div>
+                    <div class="shop-item-desc">${producer.description}</div>
+                `;
+                
+                if (canAfford) {
+                    itemElement.addEventListener('click', () => buyProducer(producer.id));
+                }
+                
+                elements.shopItems.appendChild(itemElement);
+            });
+        }
+        
+        // Update upgrades display
+        function updateUpgrades() {
+            elements.upgradeItems.innerHTML = '';
+            
+            upgradeTypes.forEach(upgrade => {
+                const upgradeState = game.upgrades[upgrade.id];
+                
+                // Skip if not unlocked or already purchased
+                if (!upgradeState.unlocked || upgradeState.purchased) return;
+                
+                const canAfford = game.money >= upgrade.cost;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = `upgrade-item ${canAfford ? '' : 'disabled'}`;
+                itemElement.innerHTML = `
+                    <div class="upgrade-name">${upgrade.name}</div>
+                    <div class="upgrade-cost">${formatNumber(upgrade.cost)} ლარი</div>
+                    <div class="upgrade-desc">${upgrade.description}</div>
+                `;
+                
+                if (canAfford) {
+                    itemElement.addEventListener('click', () => buyUpgrade(upgrade.id));
+                }
+                
+                elements.upgradeItems.appendChild(itemElement);
+            });
+        }
+        
+        // Update achievements display
+        function updateAchievements() {
+            elements.achievementItems.innerHTML = '';
+            
+            achievementTypes.forEach(achievement => {
+                const achievementState = game.achievements[achievement.id];
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = `achievement-item ${achievementState.earned ? '' : 'locked'} ${achievementState.earned && !achievementState.displayed ? 'new' : ''}`;
+                itemElement.innerHTML = `
+                    <div class="achievement-name">${achievement.name}</div>
+                    <div class="achievement-desc">${achievement.description}</div>
+                `;
+                
+                if (achievementState.earned && !achievementState.displayed) {
+                    achievementState.displayed = true;
+                }
+                
+                elements.achievementItems.appendChild(itemElement);
+            });
+        }
+        
+        // Buy producer
+        function buyProducer(producerId) {
+            const producer = producerTypes.find(p => p.id === producerId);
+            const producerState = game.producers[producerId];
+            const cost = producer.baseCost * Math.pow(1.15, producerState.count);
+            
+            if (game.money >= cost) {
+                game.money -= cost;
+                producerState.count++;
+                calculateMoneyPerSecond();
+                showNotification(`Purchased ${producer.name}`);
+                updateDisplay();
+                checkAchievements();
+            }
+        }
+        
+        // Buy upgrade
+        function buyUpgrade(upgradeId) {
+            const upgrade = upgradeTypes.find(u => u.id === upgradeId);
+            const upgradeState = game.upgrades[upgradeId];
+            
+            if (game.money >= upgrade.cost && !upgradeState.purchased) {
+                game.money -= upgrade.cost;
+                upgradeState.purchased = true;
+                
+                // Apply upgrade effects
+                applyUpgradeEffects(upgrade);
+                
+                showNotification(`Purchased upgrade: ${upgrade.name}`);
+                updateDisplay();
+                checkAchievements();
+            }
+        }
+        
+        // Apply upgrade effects
+        function applyUpgradeEffects(upgrade) {
+            if (upgrade.effect.clickMultiplier) {
+                game.clickMultiplier *= upgrade.effect.clickMultiplier;
+            }
+            
+            if (upgrade.effect.producerMultiplier) {
+                for (const [producerId, multiplier] of Object.entries(upgrade.effect.producerMultiplier)) {
+                    game.producers[producerId].multiplier *= multiplier;
+                }
+            }
+            
+            if (upgrade.effect.globalProducerMultiplier) {
+                for (const producerId in game.producers) {
+                    game.producers[producerId].multiplier *= upgrade.effect.globalProducerMultiplier;
+                }
+            }
+            
+            calculateMoneyPerSecond();
+        }
+        
+        // Calculate money per second
+        function calculateMoneyPerSecond() {
+            let perSecond = 0;
+            
+            producerTypes.forEach(producer => {
+                const producerState = game.producers[producer.id];
+                perSecond += producer.baseOutput * producerState.count * producerState.multiplier;
+            });
+            
+            game.moneyPerSecond = perSecond;
+        }
+        
+        // Check if upgrades should be unlocked
+        function checkUpgradesUnlocked() {
+            upgradeTypes.forEach(upgrade => {
+                const upgradeState = game.upgrades[upgrade.id];
+                
+                if (!upgradeState.unlocked && !upgradeState.purchased) {
+                    let requirementMet = true;
+                    
+                    if (upgrade.requirement.totalPastries && game.totalPastries < upgrade.requirement.totalPastries) {
+                        requirementMet = false;
+                    }
+                    
+                    if (upgrade.requirement.producers) {
+                        for (const [producerId, count] of Object.entries(upgrade.requirement.producers)) {
+                            if (game.producers[producerId].count < count) {
+                                requirementMet = false;
+                            }
+                        }
+                    }
+                    
+                    if (requirementMet) {
+                        upgradeState.unlocked = true;
+                        updateUpgrades();
+                    }
+                }
+            });
+        }
+        
+        // Check for achievements
+        function checkAchievements() {
+            let newAchievements = false;
+            
+            achievementTypes.forEach(achievement => {
+                const achievementState = game.achievements[achievement.id];
+                
+                if (!achievementState.earned) {
+                    let requirementMet = true;
+                    
+                    if (achievement.requirement.totalPastries && game.totalPastries < achievement.requirement.totalPastries) {
+                        requirementMet = false;
+                    }
+                    
+                    if (achievement.requirement.producerCount) {
+                        for (const [producerId, count] of Object.entries(achievement.requirement.producerCount)) {
+                            if (game.producers[producerId].count < count) {
+                                requirementMet = false;
+                            }
+                        }
+                    }
+                    
+                    if (achievement.requirement.totalProducers) {
+                        let totalProducers = 0;
+                        for (const producerId in game.producers) {
+                            totalProducers += game.producers[producerId].count;
+                        }
+                        if (totalProducers < achievement.requirement.totalProducers) {
+                            requirementMet = false;
+                        }
+                    }
+                    
+                    if (achievement.requirement.totalUpgrades) {
+                        let totalUpgrades = 0;
+                        for (const upgradeId in game.upgrades) {
+                            if (game.upgrades[upgradeId].purchased) {
+                                totalUpgrades++;
+                            }
+                        }
+                        if (totalUpgrades < achievement.requirement.totalUpgrades) {
+                            requirementMet = false;
+                        }
+                    }
+                    
+                    if (achievement.requirement.allProducerTypes) {
+                        for (const producer of producerTypes) {
+                            if (game.producers[producer.id].count === 0) {
+                                requirementMet = false;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (achievement.requirement.moneyPerSecond && game.moneyPerSecond < achievement.requirement.moneyPerSecond) {
+                        requirementMet = false;
+                    }
+                    
+                    if (requirementMet) {
+                        achievementState.earned = true;
+                        newAchievements = true;
+                        showNotification(`Achievement unlocked: ${achievement.name}!`);
+                    }
+                }
+            });
+            
+            if (newAchievements) {
+                updateAchievements();
+            }
+        }
+        
+        // Check for pastry progression
+        function checkPastryProgress() {
+            const nextPastryLevel = game.currentPastryLevel + 1;
+            if (nextPastryLevel < pastryTypes.length) {
+                const nextPastry = pastryTypes[nextPastryLevel];
+                const requiredPastries = nextPastry.value * 20;
+                
+                if (game.totalPastries >= requiredPastries) {
+                    game.currentPastryLevel = nextPastryLevel;
+                    elements.clicker.style.backgroundImage = `url('${nextPastry.image}')`;
+                    showNotification(`Unlocked new pastry: ${nextPastry.name}!`);
+                    updateDisplay();
+                }
+            }
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            elements.notification.textContent = message;
+            elements.notification.classList.add('show');
+            
+            setTimeout(() => {
+                elements.notification.classList.remove('show');
+            }, game.settings.notificationDuration);
+        }
+        
+        // Game initialization
+        function initGame() {
+            // Unlock first producer
+            game.producers.apprentice.unlocked = true;
+            
+            // Set click handler for pastry
+            elements.clicker.addEventListener('click', handlePastryClick);
+            
+            // Set up game loop
+            setInterval(gameLoop, game.autoClickerInterval);
+            
+            // Set up save/load/reset
+            elements.saveBtn.addEventListener('click', saveGame);
+            elements.loadBtn.addEventListener('click', loadGame);
+            elements.resetBtn.addEventListener('click', resetGame);
+            
+            // Initial display update
+            updateDisplay();
+            
+            // Check for unlocks
+            checkUpgradesUnlocked();
+            checkAchievements();
+        }
+        
+        // Game loop
+        function gameLoop() {
+            // Calculate time since last tick for offline progress
+            const now = Date.now();
+            const timeDiff = (now - game.lastSave) / 1000;
+            game.lastSave = now;
+            
+            // Add money from producers
+            if (game.moneyPerSecond > 0) {
+                addMoney(game.moneyPerSecond * timeDiff);
+            }
+            
+            // Unlock new producers based on money
+            producerTypes.forEach(producer => {
+                const producerState = game.producers[producer.id];
+                if (!producerState.unlocked && game.money >= producer.baseCost * 0.5) {
+                    producerState.unlocked = true;
+                    updateShop();
+                }
+            });
+        }
+        
+        // Handle pastry click
+        function handlePastryClick(e) {
+            const currentPastry = pastryTypes[game.currentPastryLevel];
+            const moneyToAdd = currentPastry.value * game.clickMultiplier;
+            
+            // Create click indicator
+            const indicator = document.createElement('div');
+            indicator.className = 'click-indicator';
+            indicator.textContent = '+' + formatNumber(moneyToAdd);
+            indicator.style.left = (e.clientX - e.target.getBoundingClientRect().left) + 'px';
+            indicator.style.top = (e.clientY - e.target.getBoundingClientRect().top) + 'px';
+            elements.clicker.appendChild(indicator);
+            
+            // Remove indicator after animation
+            setTimeout(() => {
+                indicator.remove();
+            }, 1000);
+            
+            addMoney(moneyToAdd);
+        }
+        
+        // Save game to local storage
+        function saveGame() {
+            localStorage.setItem('georgianPastryClicker', JSON.stringify(game));
+            showNotification('Game saved successfully!');
+        }
+        
+        // Load game from local storage
+        function loadGame() {
+            const savedGame = localStorage.getItem('georgianPastryClicker');
+            if (savedGame) {
+                const parsedGame = JSON.parse(savedGame);
+                
+                // Merge saved game with default game to ensure all properties exist
+                Object.assign(game, parsedGame);
+                
+                // Update display
+                elements.clicker.style.backgroundImage = `url('${pastryTypes[game.currentPastryLevel].image}')`;
+                calculateMoneyPerSecond();
+                updateDisplay();
+                showNotification('Game loaded successfully!');
+            } else {
+                showNotification('No saved game found!');
+            }
+        }
+        
+        // Reset game
+        function resetGame() {
+            if (confirm('Are you sure you want to reset your game? All progress will be lost!')) {
+                localStorage.removeItem('georgianPastryClicker');
+                location.reload();
+            }
+        }
+        
+        // Start the game
+        initGame();
+    </script>
+</body>
+</html>
